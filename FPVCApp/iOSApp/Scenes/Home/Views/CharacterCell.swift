@@ -70,9 +70,9 @@ class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
     
     
     // MARK: - Encapsulamento
-    public func setupCell(with data: MarvelCharacterData, image: UIImage?) {
+    public func setupCell(with data: MarvelCharacterData, image: KDSImage?) {
         titleLabel.text = data.name
-        imageView.prepare(image: image)
+        imageView.setupImage(with: image)
     }
     
 

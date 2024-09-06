@@ -70,7 +70,7 @@ open class KDSImageView: UIImageView, KDSComponent, KDSSpinnerHandler {
     
     // MARK: - Encapsulamento
     final public func setupImage(with image: KDSImage?) {
-        self.image = image?.imageCreated
+        prepare(image: image?.imageCreated)
     }
     
     final public func prepare(image: UIImage?) {

@@ -16,7 +16,19 @@ public enum KDSCollectionReusableViews {
     case header
     case cell
     
-    var key: String {
+    
+    /* Construtores */
+    public init(kind: String) {
+        self = switch kind {
+        case UICollectionView.elementKindSectionFooter: .footer
+        case UICollectionView.elementKindSectionHeader: .header
+        default: .cell
+        }
+    }
+    
+    
+    /* Atributos */
+    public var key: String {
         return switch self {
         case .footer:
             UICollectionView.elementKindSectionFooter

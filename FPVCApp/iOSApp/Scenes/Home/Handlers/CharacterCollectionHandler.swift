@@ -72,27 +72,28 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     
     
     // MARK: - Configurações
-    private func updateCell(image: UIImage?, with dict: [String: Any]) {
+    private func updateCell(image: KDSImage, with dict: [String: Any]) {
         guard let indexPath = dict["indexPath"] as? IndexPath else { return }
         
         dispatcher.onMainThread {
 //            print("[CollectionHandler] \(#function) | Atualizando a imagem da célula: \(indexPath)")
             let cell = self.collection.cellForItem(at: indexPath) as? CharacterCell
             if let cell {
-                self.setupCellImage(image, at: cell)
+                image.createIfEmpty(asset: FPVCAsset.imageEmptyState)
+                cell.imageView.setupImage(with: image)
             } else {
                 self.collection.reloadItems(at: [indexPath])
             }
         }
     }
     
-    private func setupCellImage(_ image: UIImage?, at cell: CharacterCell) {
-        if let image {
-            cell.imageView.prepare(image: image)
-        } else {
-            let emptyImage = KDSImage(asset: FPVCAsset.imageEmptyState)
-            cell.imageView.setupImage(with: emptyImage)
-        }
+    private func createFooter(at indexPath: IndexPath) -> UICollectionReusableView? {
+        let type: KDSCollectionReusableViews = .footer
+        let footer = collection.reusableView(as: CharacterFooter.self, ofKind: type.key, for: indexPath)
+        footer?.delegate = self
+        
+        isLoadingNewData ? footer?.isFetchingNewData() : Void()
+        return footer
     }
 }
 
@@ -133,25 +134,9 @@ extension CharacterCollectionHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        var reusableView: UICollectionReusableView?
-        
-        switch kind {
-        case UICollectionView.elementKindSectionFooter:
-            let footer = collection.reusableView(as: CharacterFooter.self, ofKind: kind, for: indexPath)
-            print("[CollectionHandler] Tem footer? \(footer.isNotNil)")
-            
-            footer?.delegate = self
-            
-            if isLoadingNewData {
-                footer?.isFetchingNewData()
-            }
-            reusableView = footer
-        default:
-            break
-        }
-        
-        
-        return reusableView ?? UICollectionReusableView()
+        let defaultView = UICollectionReusableView()
+        guard KDSCollectionReusableViews(kind: kind) == .footer else { return defaultView }
+        return createFooter(at: indexPath) ?? defaultView
     }
 }
 
@@ -208,11 +193,11 @@ extension CharacterCollectionHandler {
 // MARK: - + ImagesDownloaderDelegate
 extension CharacterCollectionHandler {
     
-    func didDownloadImageSuccessfully(image: UIImage, _ dict: [String: Any]) {
+    func didDownloadImageSuccessfully(image: KDSImage, _ dict: [String: Any]) {
         updateCell(image: image, with: dict)
     }
     
     func didDownloadImageFailure(error: ImagesDownloaderErrors, _ dict: [String: Any]) {
-        updateCell(image: nil, with: dict)
+        updateCell(image: KDSImage(), with: dict)
     }
 }

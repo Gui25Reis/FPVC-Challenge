@@ -12,6 +12,7 @@ import UIKit
 
 
 class KDSGifMaker {
+    
     let data: Data
     
     private var source: CGImageSource?
@@ -32,7 +33,7 @@ class KDSGifMaker {
         
         let frameCount = CGImageSourceGetCount(source)
         
-        if frameCount == 1 {
+        if frameCount == 1 { // Imagem Estática
             return UIImage(data: data)
         }
         
