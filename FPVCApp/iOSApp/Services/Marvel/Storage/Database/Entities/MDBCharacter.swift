@@ -17,10 +17,10 @@ public class MDBCharacter: NSManagedObject, Identifiable {
         return NSFetchRequest<MDBCharacter>(entityName: "MDBCharacter")
     }
     
-    @nonobjc public class func fetchRequest(forId: String) -> NSFetchRequest<MDBCharacter> {
+    @nonobjc public class func fetchRequest(forId id: String) -> NSFetchRequest<MDBCharacter> {
         let request = fetchRequest()
         request.fetchLimit = 1
-        request.predicate = NSPredicate(format: "dataId == %@", forId)
+        request.predicate = NSPredicate(format: "dataId == %@", id)
         return request
     }
 
@@ -29,6 +29,7 @@ public class MDBCharacter: NSManagedObject, Identifiable {
     @NSManaged public var infos: String
     @NSManaged public var image: String
     @NSManaged public var modified: String
+    @NSManaged public var dateFavorited: String
     @NSManaged public var comics: String
     @NSManaged public var series: String
     @NSManaged public var stories: String
@@ -41,6 +42,7 @@ public class MDBCharacter: NSManagedObject, Identifiable {
         infos = data.infos.data
         image = data.image.imageName
         modified = data.modified.defaultValue
+        dateFavorited = data.favoritedDate
         comics = data.comics.data
         series = data.series.data
         stories = data.stories.data

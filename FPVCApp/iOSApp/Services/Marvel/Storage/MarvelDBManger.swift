@@ -10,29 +10,31 @@
 
 import UIKit
 import KingsStorage
+import KingsFoundation
 import CoreData
 
 
-class MarvelDBManger: CoreDataManager, StorageHadler {
+class MarvelDBManager: CoreDataManager, StorageHadler {
     
     typealias StorageData = MarvelCharacterData
     
-    static let shared = MarvelDBManger()
+    static let shared = MarvelDBManager()
     
     override var dbModelName: String { "MarvelDataBase" }
     
     
     // MARK: - StorageHadler
     func save(_ data: StorageData, forKey key: String) {
+        let model = fetchItem(withId: key)
+        guard model.isNil else { return }
+        
+        print("[MarvelDBManager] Salvando novo dado: \n\(data)")
         let newData = MDBCharacter(context: mainContext)
         newData.populate(with: data)
     }
     
     func retrieve(forKey key: String) -> StorageData? {
-        let request = MDBCharacter.fetchRequest(forId: key)
-        let data = try? self.mainContext.fetch(request)
-        
-        guard let model = data?.first else { return nil }
+        guard let model = fetchItem(withId: key) else { return nil }
         return MarvelCharacterData(dbModel: model)
     }
     
@@ -45,15 +47,12 @@ class MarvelDBManger: CoreDataManager, StorageHadler {
     }
     
     func delete(forKey key: String) {
-        let request = MDBCharacter.fetchRequest(forId: key)
-        let data = try? self.mainContext.fetch(request)
-        
-        guard let model = data?.first else { return }
+        guard let model = fetchItem(withId: key) else { return }
         mainContext.delete(model)
     }
     
     func cleanAll() {
-        let request: NSFetchRequest<NSFetchRequestResult>  = MDBCharacter.fetchRequest()
+        let request: NSFetchRequest<NSFetchRequestResult> = MDBCharacter.fetchRequest()
         request.includesPropertyValues = false
                 
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: request)
@@ -63,5 +62,11 @@ class MarvelDBManger: CoreDataManager, StorageHadler {
     
     func saveChanges() {
         try? self.saveContext()
+    }
+    
+    private func fetchItem(withId id: String) -> MDBCharacter? {
+        let request = MDBCharacter.fetchRequest(forId: id)
+        let data = try? self.mainContext.fetch(request)
+        return data?.first
     }
 }

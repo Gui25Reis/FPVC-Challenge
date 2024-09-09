@@ -42,4 +42,29 @@ open class KDSLabel: UILabel, KDSComponent {
         activateConstraints()
         setupFont(with: defaultFontConfig)
     }
+    
+    
+    final public func setText(_ text: String, icon image: KDSImage) {
+        let attributedString = NSMutableAttributedString(string: text)
+        
+        let range = (text as NSString).range(of: "$@")
+        
+        // Se encontrar o marcador, fazer a substituição
+        guard range.location != NSNotFound, let icon = image.imageCreated
+        else {
+            self.text = text
+            return
+        }
+        
+        let iconAttachment = NSTextAttachment()
+        iconAttachment.image = icon.withColor(textColor)
+        
+        let iconSize = font.pointSize * 1
+        iconAttachment.bounds = CGRect(x: 0, y: -3, width: iconSize+3, height: iconSize)
+        
+        let iconString = NSAttributedString(attachment: iconAttachment)
+        
+        attributedString.replaceCharacters(in: range, with: iconString)
+        attributedText = attributedString
+    }
 }

@@ -8,8 +8,9 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
-import Foundation
 import UIKit
+import KingsFoundation
+
 
 public class FileManegerType {
     
@@ -32,7 +33,7 @@ public class FileManegerType {
     
     public func getFilePath(fileName: String) -> String? {
         let fileUrl = directoryURL?.appendingPathComponent(fileName)
-        let filePath = fileUrl?.absoluteString
+        let filePath = fileUrl?.path
         
         guard let filePath, checkIfFileExists(at: filePath)
         else { return nil }

@@ -121,7 +121,7 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
     }
     
     private func favoriteAction(at button: KDSNavButton) {
-        characterInfos.isFavorited.toggle()
+        characterInfos.didChangeFavoriteStatus()
         let favoriteIcon = KDSIcons.favoriteIcon(basedOn: characterInfos.isFavorited)
         button.kdsImage = KDSImage(asset: favoriteIcon)
         FavoriteManager.shared.didChangeFavoriteStatus(data: characterInfos)

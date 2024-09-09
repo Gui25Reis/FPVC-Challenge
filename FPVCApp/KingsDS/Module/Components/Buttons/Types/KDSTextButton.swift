@@ -19,7 +19,7 @@ open class KDSTextButton: KDSButton {
     let underlineAttributes: StringAttributes = [
         NSAttributedString.Key.underlineStyle: 1,
         NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .regular),
-        NSAttributedString.Key.foregroundColor: KDSColors.accentButton
+        NSAttributedString.Key.foregroundColor: KDSColors.red
     ]
     
     final public override var title: String? {

@@ -3,6 +3,7 @@
     <entity name="MDBCharacter" representedClassName="MDBCharacter" syncable="YES">
         <attribute name="comics" attributeType="String"/>
         <attribute name="dataId" attributeType="String"/>
+        <attribute name="dateFavorited" optional="YES" attributeType="String"/>
         <attribute name="events" attributeType="String"/>
         <attribute name="image" attributeType="String"/>
         <attribute name="infos" attributeType="String"/>

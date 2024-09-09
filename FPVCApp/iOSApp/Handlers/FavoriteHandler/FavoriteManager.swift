@@ -18,44 +18,61 @@ class FavoriteManager {
     
     static let shared = FavoriteManager()
     
-    var cache = NSCacheType<MarvelCharacterData>()
-    var persistent = MarvelDBManger.shared
+    // Managers
+    var persistent = MarvelDBManager.shared
     var imagesStorage = ImagesStorage(directoryType: .documentDirectory)
     
+    // Caches
+    var allDataFromDB = [Int:MarvelCharacterData]()
+    var unsavedData = NSCacheType<MarvelCharacterData>()
+    
+    
+    // Handlers
+    var dispatcher = KFDispatcherQueue(provider: DispatchQueue.global(qos: .background))
+    var notificator = KFNotificator(provider: NotificationCenter.default)
+    
+    // Data
     var unsavedChanges = Set<Int>()
+    var hasChanges: Bool { !unsavedChanges.isEmpty }
     
-    var allData = [Int:MarvelCharacterData]()
     var isDatabaseEmpty = false
+    var lastDataRetrieved: [MarvelCharacterData]?
     
-    let dispatcher = KFDispatcherQueue(provider: DispatchQueue.global(qos: .background))
     
-    
+    // MARK: - Métodos
     func didChangeFavoriteStatus(data: MarvelCharacterData) {
         unsavedChanges.insert(data.id)
-        
-        let cached = cache.retrieve(forKey: data.id.toString)
-        if let cached {
-            cached.isFavorited = data.isFavorited
-        } else {
-            cache.save(data, forKey: data.id.toString)
-        }
+        unsavedData.save(data, forKey: data.id.toString)
     }
     
-    func checkIfIsFavorited(id: Int) -> Bool {
+    func checkIfIsFavorited(id: Int) -> MarvelCharacterData? {
         getAllDataIfNeeded()
-        return allData[id]?.isFavorited == true
+        let data = allDataFromDB[id]
+        let isFavorited = data?.isFavorited == true
+        return isFavorited ? data : nil
     }
     
     func getFavoritedCharacters() -> [MarvelCharacterData] {
-        return persistent.retrieveAll()
+        if let lastDataRetrieved, hasChanges == false {
+            return lastDataRetrieved
+        }
+        
+        let favoritedData = persistent.retrieveAll()
+        favoritedData.forEach {
+            let imageSaved = imagesStorage.retrieve(forKey: $0.image.imageName)
+            $0.image.image = KDSImage(image: imageSaved)
+        }
+        lastDataRetrieved = favoritedData
+        return favoritedData
     }
     
     func updateDataFromRequest(_ dataReceived: inout [MarvelCharacterData]) {
         for data in dataReceived {
             let id = data.id
-            guard checkIfIsFavorited(id: id) else { continue }
+            guard let favData = checkIfIsFavorited(id: id) else { continue }
             
             data.isFavorited = true
+            data.favoritedDate = favData.favoritedDate
             
             let imageDownloaded = imagesStorage.retrieve(forKey: data.image.imageName)
             if let imageDownloaded {
@@ -69,18 +86,20 @@ class FavoriteManager {
         
         for id in unsavedChanges {
             let key = id.toString
-            let data = cache.retrieve(forKey: key)
+            let data = unsavedData.retrieve(forKey: key)
             
             guard let data else { continue }
             
             updateChanges(for: data)
-            cache.delete(forKey: key)
+            unsavedData.delete(forKey: key)
         }
         
         unsavedChanges.removeAll()
+        
         dispatcher.async {
             self.persistent.saveChanges()
             self.getAllDataIfNeeded(isNeeded: true)
+            self.notificator.sendEvent(forKey: .coreDateSaving)
         }
     }
     
@@ -88,11 +107,13 @@ class FavoriteManager {
     private func updateChanges(for data: MarvelCharacterData) {
         let key = data.id.toString
         guard data.isFavorited else {
+            // Removendo
             imagesStorage.delete(forKey: key)
             persistent.delete(forKey: key)
             return
         }
         
+        // Adicionado
         persistent.save(data, forKey: key)
         if let image = data.image.image?.imageCreated {
             imagesStorage.save(image, forKey: data.image.imageName)
@@ -100,12 +121,18 @@ class FavoriteManager {
     }
     
     private func getAllDataIfNeeded(isNeeded: Bool = false) {
-        guard allData.isEmpty || isNeeded else { return }
+        guard allDataFromDB.isEmpty || isNeeded else { return }
         
         if isDatabaseEmpty && !isNeeded { return }
         
         let dataSaveOnCoreDate = persistent.retrieveAll()
-        dataSaveOnCoreDate.forEach { allData[$0.id] = $0 }
+        dataSaveOnCoreDate.forEach {
+            let imageSaved = imagesStorage.retrieve(forKey: $0.image.imageName)
+            $0.image.image = KDSImage(image: imageSaved)
+            allDataFromDB[$0.id] = $0
+        }
+        
         isDatabaseEmpty = dataSaveOnCoreDate.isEmpty
+        lastDataRetrieved = dataSaveOnCoreDate
     }
 }

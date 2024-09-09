@@ -20,8 +20,8 @@ class MarvelCharacterData: CustomStringConvertible {
     let modified: String?
     
     var image: MarvelCharacterImage
-    var hasDownloaded: Bool = false
     var isFavorited: Bool = false
+    var favoritedDate: String = ""
     
     let comics: MarvelCharacterDataUI
     let series: MarvelCharacterDataUI
@@ -90,6 +90,23 @@ class MarvelCharacterData: CustomStringConvertible {
         events = ("Events", dbModel.events)
         
         isFavorited = true
+        favoritedDate = dbModel.dateFavorited
+    }
+    
+    func didChangeFavoriteStatus(to status: Bool? = nil) {
+        if let status {
+            isFavorited = status
+        } else {
+            isFavorited.toggle()
+        }
+        
+        favoritedDate = ""
+        
+        guard isFavorited else { return }
+        
+        let now = Date.now
+        favoritedDate = now.toString(with: .completeWritten)
+        print("[MarvelCharacterData] \(#function) | Data: \(favoritedDate)")
     }
     
     
@@ -102,7 +119,8 @@ class MarvelCharacterData: CustomStringConvertible {
             description: \(infos.data)
             modified: \(modified.string)
             image: \(image)
-            hasDownloaded: \(hasDownloaded)
+            favoritedDate: \(favoritedDate)
+            isFavorited: \(isFavorited)
             comics: \(comics.data)
             series: \(series.data)
             stories: \(stories.data)

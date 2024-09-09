@@ -240,7 +240,8 @@ extension CharacterCollectionHandler {
     
     func didChangeFavoriteStatus(_ cell: CharacterCell) {
         let data = data[cell.tag]
-        data.isFavorited.toggle()
+        
+        data.didChangeFavoriteStatus()
         cell.updateFavoriteIcon(basedOn: data.isFavorited)
         
         FavoriteManager.shared.didChangeFavoriteStatus(data: data)

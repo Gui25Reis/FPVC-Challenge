@@ -8,6 +8,9 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
+import Foundation
+
+
 public extension String {
     
     @inlinable var isNotEmpty: Bool {
@@ -22,5 +25,15 @@ public extension String {
     
     var toInt: Int {
         Int(self).defaultValue
+    }
+    
+    
+    func toDate(with formatType: KDSDateFormats) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formatType.format
+        dateFormatter.timeZone = Date.brazilTimeZone
+        dateFormatter.locale = Date.brazilLocale
+        
+        return dateFormatter.date(from: self)
     }
 }

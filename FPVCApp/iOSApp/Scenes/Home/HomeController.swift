@@ -118,7 +118,6 @@ extension HomeViewController: CharacterCollectionHandlerDelegate {
     
     func routeToInfos(with data: MarvelCharacterData) {
         let controller = InfosController(characterInfos: data)
-        navigationController?.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }
 }
