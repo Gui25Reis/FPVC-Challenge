@@ -35,6 +35,17 @@ public extension KDSCollectionHandler {
         collection.delegate = self
         collection.dataSource = self
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, invalidateSupplementaryElementOfKind kind: KDSCollectionReusableViews, at indexPath: IndexPath) {
+        let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
+        guard let layout else { return }
+                
+        let invalidationContext = UICollectionViewFlowLayoutInvalidationContext()
+        invalidationContext.invalidateSupplementaryElements(ofKind: kind.key, at: [indexPath])
+        
+        layout.invalidateLayout(with: invalidationContext)
+    }
 }
 
 

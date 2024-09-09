@@ -17,8 +17,8 @@ class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDe
     
     override var controllerTitle: String? { "Favoritos" }
     
-    lazy var screen: HomeScreen = {
-        let view = HomeScreen()
+    lazy var screen: FavoriteScreen = {
+        let view = FavoriteScreen()
         return view
     }()
     
@@ -66,7 +66,6 @@ class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDe
     }
     
     @objc private func updateTableData() {
-        print("[FavoriteController] \(#function)")
         let newData = FavoriteManager.shared.getFavoritedCharacters()
         collectionHandler?.newData(newData)
     }

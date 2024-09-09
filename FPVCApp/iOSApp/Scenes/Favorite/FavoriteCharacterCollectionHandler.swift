@@ -52,6 +52,7 @@ class FavoriteCharacterCollectionHandler: NSObject, KDSCollectionHandler, KDSCol
             self.data = data
             self.collection.updateData()
             self.collection.removeSpinner()
+            self.showEmptyViewIfNeeded()
         }
     }
     
@@ -72,6 +73,12 @@ class FavoriteCharacterCollectionHandler: NSObject, KDSCollectionHandler, KDSCol
         cell?.tag = row
                 
         return cell
+    }
+    
+    private func showEmptyViewIfNeeded() {
+        data.isEmpty
+        ? collection.showEmptyView()
+        : collection.hideEmptyView()
     }
 }
 

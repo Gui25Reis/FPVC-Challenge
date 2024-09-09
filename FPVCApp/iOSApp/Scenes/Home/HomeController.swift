@@ -10,14 +10,13 @@ import KingsDS
 import KingsFoundation
 
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, CharacterCollectionHandlerDelegate, HomeScreenDelegate {
     
     override var controllerTitle: String? { "Personagens" }
     
     lazy var screen: HomeScreen = {
         let view = HomeScreen()
-        charactersHandler = CharacterCollectionHandler(collection: view.characterCollection)
-        charactersHandler?.delegate = self
+        view.delegate = self
         return view
     }()
     
@@ -48,6 +47,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupCollection()
         fetchCharacters()
     }
     
@@ -72,10 +72,13 @@ class HomeViewController: UIViewController {
         navigationItem.largeTitleDisplayMode = .always
     }
     
+    private func setupCollection() {
+        charactersHandler = CharacterCollectionHandler(collection: screen.characterCollection)
+        charactersHandler?.delegate = self
+    }
+    
     
     private func fetchCharacters() {
-//        api.addParameter(data: .nameStartsWith("Galac"))
-        
         try? network.makeRequest(for: api) { [weak self] result in
             switch result {
             case .success(let data):
@@ -83,7 +86,7 @@ class HomeViewController: UIViewController {
                 self?.updateCollectionData(with: data)
                 
             case .failure(_):
-                print("Falha na request")
+                self?.charactersHandler?.newData([])
             }
         }
     }
@@ -109,7 +112,7 @@ class HomeViewController: UIViewController {
 
 
 // MARK: - + CharacterCollectionHandlerDelegate
-extension HomeViewController: CharacterCollectionHandlerDelegate {
+extension HomeViewController {
     
     func fetchMoreData() {
         api.prepareForPagination()
@@ -119,5 +122,17 @@ extension HomeViewController: CharacterCollectionHandlerDelegate {
     func routeToInfos(with data: MarvelCharacterData) {
         let controller = InfosController(characterInfos: data)
         navigationController?.pushViewController(controller, animated: true)
+    }
+}
+
+
+// MARK: - + HomeScreenDelegate
+extension HomeViewController {
+    
+    func tryAgainAction() {
+        print("Tentando de novo")
+        screen.hideEmptyView()
+        screen.characterCollection.showSpinner(style: .large)
+        fetchCharacters()
     }
 }

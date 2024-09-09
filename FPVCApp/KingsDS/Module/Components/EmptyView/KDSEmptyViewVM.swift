@@ -10,12 +10,13 @@
 
 import KingsFoundation
 
+
 public struct KDSEmptyViewVM {
     public var image: KDSImage?
     public var title: String
     public var message: String
     public var buttomVM: KDSButtonViewModel?
-    
+    public var attributted: (String, KDSImage)?
     
     var hasImage: Bool { image.isNotNil }
     
@@ -26,6 +27,14 @@ public struct KDSEmptyViewVM {
         self.image = image
         self.title = title
         self.message = message
+        self.buttomVM = buttomVM
+    }
+    
+    public init(image: KDSImage? = nil, title: String, attributted: (String, KDSImage), buttomVM: KDSButtonViewModel? = nil) {
+        self.image = image
+        self.title = title
+        self.message = ""
+        self.attributted = attributted
         self.buttomVM = buttomVM
     }
 }

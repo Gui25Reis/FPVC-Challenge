@@ -14,7 +14,7 @@ import KingsFoundation
 
 
 /// Collection costumizada
-open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDSSpinnerHandler {
+open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDSSpinnerHandler, KDSEmptyViewHandler {
     
     open override var bounds: CGRect {
         didSet { showSpinnerIfCan(style: .large) }
@@ -36,8 +36,14 @@ open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDS
     
     public var canShowSpinner: Bool {
         loadingIndicator.isNil && !bounds.isEmpty &&
-        (kdsDelegate?.hasDataInCollection).isFalse
+        (kdsDelegate?.hasDataInCollection).isFalse && emptyView.isHidden
     }
+    
+    
+    /* KDSEmptyViewHandler */
+    open lazy var emptyView = KDSEmptyView(viewModel: emptyViewVM)
+    
+    open var emptyViewVM = KDSEmptyViewVM(title: "", message: "")
     
     
     
@@ -82,7 +88,6 @@ open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDS
     // Header & Footers
     final public func registerView<T>(for view: T.Type, ofKind kind: KDSCollectionReusableViews) where T: KDSCustomComponent {
         guard let view = view as? KDSCollectionReusableViewType.Type else { return }
-        print("\(#function) | Registrando view")
         register(view, forSupplementaryViewOfKind: kind.key, withReuseIdentifier: view.identifier)
         registrations[view.identifier] = kind
     }
@@ -105,5 +110,19 @@ open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDS
         
         clipsToBounds = true
         layer.masksToBounds = true
+    }
+    
+    public func showEmptyView() {
+        removeSpinner(forced: true)
+        
+        let handler = superview as? KDSEmptyViewHandler
+        handler?.showEmptyView()
+        emptyView.isHidden = false
+    }
+    
+    public func hideEmptyView() {
+        let handler = superview as? KDSEmptyViewHandler
+        handler?.hideEmptyView()
+        emptyView.isHidden = true
     }
 }

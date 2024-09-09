@@ -46,8 +46,8 @@ public extension KDSSpinnerHandler {
     }
     
     @MainActor
-    func removeSpinner() {
-        guard loadingIndicator.isNotNil else { return }
+    func removeSpinner(forced: Bool = false) {
+        guard loadingIndicator.isNotNil || forced else { return }
         
         loadingIndicator?.stopAnimating()
         loadingIndicator?.removeFromSuperview()

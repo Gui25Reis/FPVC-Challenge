@@ -24,6 +24,7 @@ public protocol KDSDataCollection: AnyObject, KDSDataCollectionType {
 
 public extension KDSDataCollection {
     
+    @MainActor
     func updateData() {
         reloadData()
         layoutIfNeeded()

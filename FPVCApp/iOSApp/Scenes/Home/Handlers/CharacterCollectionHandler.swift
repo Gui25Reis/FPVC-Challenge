@@ -58,12 +58,17 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     
     
     // MARK: - Encapsulamento
-    func newData(_ data: [MarvelCharacterData]) {
+    func newData(_ newData: [MarvelCharacterData]) {
+        isLoadingNewData = false
+        
         dispatcher.onMainThread {
-            self.data += data
-            self.collection.updateData()
-            self.collection.removeSpinner()
-            self.isLoadingNewData = false
+            if newData.isNotEmpty {
+                self.data += newData
+                self.collection.updateData()
+            }
+            
+            self.showEmptyViewIfNeeded()
+            self.realoadFooterIfNeeded()
         }
     }
     
@@ -83,6 +88,27 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     
     
     // MARK: - Configurações
+    
+    /* Geral */
+    @MainActor
+    private func showEmptyViewIfNeeded() {
+        data.isEmpty
+        ? collection.showEmptyView()
+        : collection.hideEmptyView()
+        collection.removeSpinner()
+    }
+    
+    @MainActor
+    private func realoadFooterIfNeeded() {
+        guard data.isNotEmpty else { return }
+        let kind: KDSCollectionReusableViews = .footer
+        
+        let visibleFooters = collection.visibleSupplementaryViews(ofKind: kind.key)
+        visibleFooters.first?.prepareForReuse()
+    }
+    
+    
+    // MARK: UI
     private func createCell(at indexPath: IndexPath) -> UICollectionViewCell? {
         let cell = collection.reusableCell(as: CharacterCell.self, for: indexPath)
         let row = indexPath.row
@@ -119,7 +145,6 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
         data[indexPath.row].image.image = image
         
         dispatcher.onMainThread {
-//            print("[CollectionHandler] \(#function) | Atualizando a imagem da célula: \(indexPath)")
             let cell = self.collection.cellForItem(at: indexPath) as? CharacterCell
             if let cell {
                 image.createIfEmpty(asset: FPVCAsset.imageEmptyState)

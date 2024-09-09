@@ -13,34 +13,20 @@ import FPVCAssets
 import UIKit
 
 
-protocol HomeScreenDelegate: AnyObject {
+class FavoriteScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
     
-    func tryAgainAction()
-}
-
-
-class HomeScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
-    
-    weak var delegate: HomeScreenDelegate?
-    
-    
-    /* Componentes UI */
     lazy var emptyView: KDSEmptyView = {
         let view = KDSEmptyView(viewModel: emptyViewVM)
         return view
     }()
     
-    lazy var emptyViewVM: KDSEmptyViewVM = {
+    var emptyViewVM: KDSEmptyViewVM = {
         KDSEmptyViewVM(
-            image: KDSImage(asset: FPVCAsset.badRequest),
-            title: "Algo de errado não está certo!",
-            message: "Não foi possível carregar os personagens! Verifique a sua conexão e tente novamente.",
-            buttomVM: KDSButtonViewModel(
-                title: "Tentar novamente",
-                action: { [weak self] _ in
-                    print("Cliquei para tentar novamente | self nil?: \(self.isNil)")
-                    self?.delegate?.tryAgainAction()
-                }
+            image: KDSImage(asset: FPVCAsset.noFavoriteContent),
+            title: "Seus favoritos!",
+            attributted: (
+                "Clique no $@ para favoritar seu personagem preferido!",
+                KDSImage(asset: KDSIcons.favorite)
             )
         )
     }()

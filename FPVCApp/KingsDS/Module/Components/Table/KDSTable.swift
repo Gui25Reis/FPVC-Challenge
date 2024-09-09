@@ -5,7 +5,13 @@ import UIKit
 
 
 /// Table costumizada
-open class KDSTable: UITableView, KDSComponent, KDSDataCollection {
+open class KDSTable: UITableView, KDSComponent, KDSDataCollection, KDSEmptyViewHandler {
+    
+    /* KDSEmptyViewHandler */
+    open lazy var emptyView = KDSEmptyView(viewModel: emptyViewVM)
+    
+    open var emptyViewVM = KDSEmptyViewVM(title: "", message: "")
+    
     
     /* MARK: - Construtor */
     

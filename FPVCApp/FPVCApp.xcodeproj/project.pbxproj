@@ -64,6 +64,8 @@
 		1D4C96692C8F027B00BEEC8C /* NotificationCenter+KFNotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C96682C8F027B00BEEC8C /* NotificationCenter+KFNotificationType.swift */; };
 		1D4C966B2C8F040A00BEEC8C /* KFNotificationKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C966A2C8F040A00BEEC8C /* KFNotificationKeys.swift */; };
 		1D4C966D2C8F104100BEEC8C /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C966C2C8F104100BEEC8C /* UIImage+Extensions.swift */; };
+		1D4C96702C8F185400BEEC8C /* KDSEmptyViewHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C966F2C8F185400BEEC8C /* KDSEmptyViewHandler.swift */; };
+		1D4C96722C8F1AE400BEEC8C /* FavoriteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C96712C8F1AE400BEEC8C /* FavoriteScreen.swift */; };
 		1D618A802C81153200F8BAE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A7F2C81153200F8BAE5 /* AppDelegate.swift */; };
 		1D618A822C81153200F8BAE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A812C81153200F8BAE5 /* SceneDelegate.swift */; };
 		1D618A842C81153200F8BAE5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A832C81153200F8BAE5 /* HomeController.swift */; };
@@ -390,6 +392,8 @@
 		1D4C96682C8F027B00BEEC8C /* NotificationCenter+KFNotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+KFNotificationType.swift"; sourceTree = "<group>"; };
 		1D4C966A2C8F040A00BEEC8C /* KFNotificationKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KFNotificationKeys.swift; sourceTree = "<group>"; };
 		1D4C966C2C8F104100BEEC8C /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		1D4C966F2C8F185400BEEC8C /* KDSEmptyViewHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KDSEmptyViewHandler.swift; sourceTree = "<group>"; };
+		1D4C96712C8F1AE400BEEC8C /* FavoriteScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteScreen.swift; sourceTree = "<group>"; };
 		1D618A7C2C81153100F8BAE5 /* FPVCApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FPVCApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1D618A7F2C81153200F8BAE5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1D618A812C81153200F8BAE5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -634,9 +638,10 @@
 		1D0D2BAA2C882254007DA385 /* Handlers */ = {
 			isa = PBXGroup;
 			children = (
+				1D4C966E2C8F183700BEEC8C /* Internal */,
 				1D0D2BAB2C882264007DA385 /* KDSCollectionHandler.swift */,
 				1D0D2BB52C883D05007DA385 /* KDSSpinnerHandler.swift */,
-				1D0D2BCB2C88F8E7007DA385 /* KDSMainDispatcher.swift */,
+				1D4C966F2C8F185400BEEC8C /* KDSEmptyViewHandler.swift */,
 			);
 			path = Handlers;
 			sourceTree = "<group>";
@@ -851,6 +856,14 @@
 				1D4C966A2C8F040A00BEEC8C /* KFNotificationKeys.swift */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		1D4C966E2C8F183700BEEC8C /* Internal */ = {
+			isa = PBXGroup;
+			children = (
+				1D0D2BCB2C88F8E7007DA385 /* KDSMainDispatcher.swift */,
+			);
+			path = Internal;
 			sourceTree = "<group>";
 		};
 		1D618A732C81153100F8BAE5 = {
@@ -1426,6 +1439,7 @@
 				1DB357C42C8D2E14003D4861 /* FavoriteController.swift */,
 				1D4C965D2C8EE66300BEEC8C /* FavoriteCharacterCell.swift */,
 				1D4C96612C8EE9E200BEEC8C /* FavoriteCharacterCollectionHandler.swift */,
+				1D4C96712C8F1AE400BEEC8C /* FavoriteScreen.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -1959,6 +1973,7 @@
 				1DB3573C2C8AD267003D4861 /* MarvelCharacterImage.swift in Sources */,
 				1D618ADE2C812B5500F8BAE5 /* APIHTTPMethod.swift in Sources */,
 				1D618A802C81153200F8BAE5 /* AppDelegate.swift in Sources */,
+				1D4C96722C8F1AE400BEEC8C /* FavoriteScreen.swift in Sources */,
 				1D4C96302C8E05BC00BEEC8C /* MarvelDBManger.swift in Sources */,
 				1D618A822C81153200F8BAE5 /* SceneDelegate.swift in Sources */,
 			);
@@ -2020,6 +2035,7 @@
 				1DB357AA2C8B1BD7003D4861 /* KDSNativeCellIcons.swift in Sources */,
 				1DB357342C8949E8003D4861 /* KDSCollectionReusableViews.swift in Sources */,
 				1D0D2BA22C86E2DB007DA385 /* KDSLabelsType.swift in Sources */,
+				1D4C96702C8F185400BEEC8C /* KDSEmptyViewHandler.swift in Sources */,
 				1D618AF12C8178D300F8BAE5 /* KingsDS.docc in Sources */,
 				1DB357C22C8D2D6E003D4861 /* UIViewController+Extensions.swift in Sources */,
 				1DB357B82C8BBF61003D4861 /* KDSDeviceAppearence.swift in Sources */,

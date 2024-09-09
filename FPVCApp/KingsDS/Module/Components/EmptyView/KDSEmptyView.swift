@@ -34,7 +34,11 @@ open class KDSEmptyView: KDSStack, KDSViewCode {
     
     private(set) public lazy var messageLabel: KDSLabel = {
         let label = KDSBodyLabel()
-        label.text = viewModel?.message
+        if let attributted = viewModel?.attributted {
+            label.setText(attributted.0, icon: attributted.1)
+        } else {
+            label.text = viewModel?.message
+        }
         label.textAlignment = .center
         label.autoAdjustBasedOnText()
         return label
@@ -114,5 +118,6 @@ open class KDSEmptyView: KDSStack, KDSViewCode {
         axis = .vertical
         distribution = .equalSpacing
         alignment = .center
+        isHidden = true
     }
 }
