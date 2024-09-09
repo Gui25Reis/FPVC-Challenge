@@ -25,9 +25,20 @@ struct CharacterCellViewModel {
 }
 
 
+
+protocol CharacterCellDelegate: AnyObject {
+    
+    func didChangeFavoriteStatus(_ cell: CharacterCell)
+}
+
+
+
 class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
     
     static let identifier = "IdCharacterCell"
+    
+    weak var delegate: CharacterCellDelegate?
+    
     
     /* Componentes UI */
     lazy var imageView: KDSImageView = {
@@ -44,6 +55,13 @@ class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
         return label
+    }()
+    
+    lazy var favoriteButton: KDSIconButton = {
+        let image = KDSImage(asset: KDSIcons.favorite)
+        let view = KDSIconButton(image: image)
+        view.action = { [unowned self] _ in self.delegate?.didChangeFavoriteStatus(self) }
+        return view
     }()
     
     
@@ -73,6 +91,12 @@ class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
     public func setupCell(with data: MarvelCharacterData, image: KDSImage?) {
         titleLabel.text = data.name
         imageView.setupImage(with: image)
+        updateFavoriteIcon(basedOn: data.isFavorited)
+    }
+    
+    public func updateFavoriteIcon(basedOn status: Bool) {
+        let icon = KDSIcons.favoriteIcon(basedOn: status)
+        favoriteButton.image = KDSImage(asset: icon)
     }
     
 
@@ -80,10 +104,12 @@ class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
     func setupHierarchy() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(favoriteButton)
     }
     
     func setupConstraints() {
         let border: CGFloat = 10
+        let buttonPadding: CGFloat = 6
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: border),
@@ -96,6 +122,10 @@ class CharacterCell: UICollectionViewCell, KDSCollectionCellType, KDSViewCode {
             titleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: border),
             titleLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -border),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -border),
+            
+            
+            favoriteButton.topAnchor.constraint(equalTo: imageView.topAnchor, constant: buttonPadding),
+            favoriteButton.rightAnchor.constraint(equalTo: imageView.rightAnchor, constant: -buttonPadding)
         ])
     }
     

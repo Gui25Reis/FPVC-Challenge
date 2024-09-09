@@ -18,8 +18,8 @@ open class KDSStack: UIStackView, KDSComponent {
         initialSetup()
     }
     
-    public init() {
-        super.init(frame: .zero)
+    public convenience init() {
+        self.init(frame: .zero)
     }
     
     required public init(coder: NSCoder) {

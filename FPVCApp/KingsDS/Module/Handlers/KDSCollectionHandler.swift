@@ -36,3 +36,33 @@ public extension KDSCollectionHandler {
         collection.dataSource = self
     }
 }
+
+
+
+
+/// Os tipos que estào de acordo com esse protocolo lidam com o funcionamento de uma collection,
+/// tanto o delegate quanto o data source dela
+public protocol KDSTableHandler: UITableViewDataSource, UITableViewDelegate {
+    
+    /// Registra uma célula
+    /// - Parameter table: table que vai ser registrada
+    func registerCell(at table: KDSTable)
+    
+    
+    init(table: KDSTable)
+}
+
+
+public extension KDSTableHandler {
+    
+    /// Linka o data source e delegate na collection
+    /// - Parameter collection: collection que vai ser linkada
+    ///
+    /// Essa função também faz o registro da célula
+    func link(with table: KDSTable) {
+        self.registerCell(at: table)
+        
+        table.delegate = self
+        table.dataSource = self
+    }
+}

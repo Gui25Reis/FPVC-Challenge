@@ -17,10 +17,12 @@ import FPVCAssets
 protocol CharacterCollectionHandlerDelegate: AnyObject {
     
     func fetchMoreData()
+    
+    func routeToInfos(with data: MarvelCharacterData)
 }
 
 
-class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownloaderDelegate, KDSCollectionDelegate, CharacterFooterDelegate {
+class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownloaderDelegate, KDSCollectionDelegate, CharacterFooterDelegate, CharacterCellDelegate {
     
     unowned let collection: KDSCollection
     
@@ -41,6 +43,9 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     
     // Outros
     var isLoadingNewData = false
+    
+    var lastCellSelected: IndexPath?
+    
     
     // MARK: - Construtores
     required init(collection: KDSCollection) {
@@ -70,10 +75,48 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
         }
     }
     
+    func updateLastSelectedCellIfNeeded() {
+        defer { lastCellSelected = nil }
+        guard let lastCellSelected else { return }
+        collection.reloadItems(at: [lastCellSelected])
+    }
+    
     
     // MARK: - Configurações
+    private func createCell(at indexPath: IndexPath) -> UICollectionViewCell? {
+        let cell = collection.reusableCell(as: CharacterCell.self, for: indexPath)
+        let row = indexPath.row
+        
+        let cellData = data[row]
+        let image = downloadImageIfNeeded(at: indexPath)
+        cell?.setupCell(with: cellData, image: image)
+        cell?.tag = row
+        cell?.delegate = self
+        
+        return cell
+    }
+    
+    private func downloadImageIfNeeded(at indexPath: IndexPath) -> KDSImage? {
+        let data = self.data[indexPath.row]
+        
+        if let image = data.image.image {
+            return image
+        }
+        
+        let image = imgDownloader.downloadFromWeb(
+            imageURL: data.image.url,
+            dict: [
+                "indexPath": indexPath,
+                "fileName": data.image.imageName
+            ]
+        )
+        data.image.image = image
+        return image
+    }
+    
     private func updateCell(image: KDSImage, with dict: [String: Any]) {
         guard let indexPath = dict["indexPath"] as? IndexPath else { return }
+        data[indexPath.row].image.image = image
         
         dispatcher.onMainThread {
 //            print("[CollectionHandler] \(#function) | Atualizando a imagem da célula: \(indexPath)")
@@ -106,19 +149,7 @@ extension CharacterCollectionHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collection.reusableCell(as: CharacterCell.self, for: indexPath)
-        
-        let cellData = data[indexPath.row]
-        
-        let image = imgDownloader.downloadFromWeb(
-            imageURL: cellData.image.url,
-            dict: [
-                "indexPath": indexPath,
-                "fileName": cellData.image.imageName
-            ]
-        )
-        
-        cell?.setupCell(with: cellData, image: image)
+        let cell = createCell(at: indexPath)
         return cell ?? UICollectionViewCell()
     }
     
@@ -155,7 +186,9 @@ extension CharacterCollectionHandler {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Célula selecionada!")
+        lastCellSelected = indexPath
+        let infos = data[indexPath.row]
+        delegate?.routeToInfos(with: infos)
     }
 }
 
@@ -165,7 +198,6 @@ extension CharacterCollectionHandler {
 extension CharacterCollectionHandler {
     
     func paginationAction() {
-        print("[CollectionHandler] Pediu novos dados para fetch")
         isLoadingNewData = true
         delegate?.fetchMoreData()
     }
@@ -199,5 +231,18 @@ extension CharacterCollectionHandler {
     
     func didDownloadImageFailure(error: ImagesDownloaderErrors, _ dict: [String: Any]) {
         updateCell(image: KDSImage(), with: dict)
+    }
+}
+
+
+// MARK: - + CharacterCellDelegate
+extension CharacterCollectionHandler {
+    
+    func didChangeFavoriteStatus(_ cell: CharacterCell) {
+        let data = data[cell.tag]
+        data.isFavorited.toggle()
+        cell.updateFavoriteIcon(basedOn: data.isFavorited)
+        
+        FavoriteManager.shared.didChangeFavoriteStatus(data: data)
     }
 }

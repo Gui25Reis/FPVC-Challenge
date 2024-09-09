@@ -14,14 +14,14 @@ import KingsFoundation
 
 public class KDSImage {
     
-    var imageCreated: UIImage?
+    private(set) public var imageCreated: UIImage?
     
     public var hasImage: Bool { imageCreated.isNotNil }
     
     
     // MARK: - Construtores
     public init() {
-        
+        /* Permitindo instância vazia */
     }
     
     public init(asset: KDSAssetsType?) {
@@ -45,6 +45,10 @@ public class KDSImage {
     
     public init(data: Data) {
         imageCreated = UIImage(data: data)
+    }
+    
+    public init(image: UIImage?) {
+        imageCreated = image
     }
     
     
@@ -80,5 +84,11 @@ public class KDSImage {
     private func createImageFrom(asset: KDSAssetsType) -> UIImage? {
         let imageVM = KDSImageViewModel(asset: asset)
         return createImageFrom(viewModel: imageVM)
+    }
+    
+    
+    // MARK: - Configurações
+    final public func cleanObject() {
+        imageCreated = nil
     }
 }

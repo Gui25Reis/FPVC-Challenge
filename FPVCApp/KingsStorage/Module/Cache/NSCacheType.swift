@@ -17,7 +17,6 @@ public struct NSCacheType<CacheValue: AnyObject>: StorageHadler {
     
     var cache = NSCache<NSString, CacheValue>()
     
-    
     public init() {
         /* Permitindo instância */
     }
@@ -29,6 +28,8 @@ public struct NSCacheType<CacheValue: AnyObject>: StorageHadler {
     public func retrieve(forKey key: String) -> StorageData? {
         return cache.object(forKey: key as NSString)
     }
+    
+    public func retrieveAll() -> [StorageData] { [] }
     
     public func delete(forKey key: String) {
         cache.removeObject(forKey: key as NSString)

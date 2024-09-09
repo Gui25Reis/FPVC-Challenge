@@ -19,7 +19,19 @@ public protocol StorageHadler {
     
     func retrieve(forKey key: String) -> StorageData?
     
+    func retrieveAll() -> [StorageData]
+    
     func delete(forKey key: String)
     
     func cleanAll()
+    
+    func saveChanges()
+}
+
+
+public extension StorageHadler {
+    
+    func saveChanges() {
+        /* Mantendo implementação opcional */
+    }
 }

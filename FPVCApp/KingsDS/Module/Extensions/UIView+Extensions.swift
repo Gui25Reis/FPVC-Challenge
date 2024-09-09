@@ -52,7 +52,7 @@ public extension UIView {
     var safeArea: UILayoutGuide { safeAreaLayoutGuide }
     
     /// Boleano que indica que há a necessidade de configurar a hierarquia e as constraints
-    var needsToCreateHierarchy: Bool {
+    @objc var needsToCreateHierarchy: Bool {
         hasSuperview && subviews.isEmpty
     }
     

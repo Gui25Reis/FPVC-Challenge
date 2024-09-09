@@ -8,7 +8,7 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
-public enum KDSIcons {
+public enum KDSIcons: KDSAssetsType {
     
     /// 􀒂
     case favorite
@@ -21,6 +21,11 @@ public enum KDSIcons {
     
     /// 􀎞
     case tabCharacters
+    
+    
+    public static func favoriteIcon(basedOn status: Bool) -> KDSIcons {
+        return status ? .favoriteSelected : .favorite
+    }
     
     
     public var file: KDSFile {

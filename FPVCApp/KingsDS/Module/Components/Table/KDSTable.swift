@@ -20,7 +20,7 @@ open class KDSTable: UITableView, KDSComponent, KDSDataCollection {
     
     /* MARK: - KDSDataCollection */
     
-    final public func registerCell<T>(for cell: T.Type) where T : KDSCustomComponent {
+    final public func registerCell<T>(for cell: T.Type) where T: KDSCustomComponent {
         guard let cell = cell as? KDSTableCellType.Type else { return }
         register(cell, forCellReuseIdentifier: cell.identifier)
     }
@@ -40,22 +40,27 @@ open class KDSTable: UITableView, KDSComponent, KDSDataCollection {
         return registeredCells?[id] != nil
     }
     
-
-//    /// Configura o handler da tabela
-//    /// - Parameter handler: handler de acordo com o protocolo
-//    public func setupTableHadler(with handler: TableHandler) {
-//        self.dataSource = handler
-//        self.delegate = handler
-//    }
-
-        
+    
+    /* MARK: - Encapsulamento */
+    
+    final public func setupDynamicCellHeight(estimatedHeight height: CGFloat) {
+        rowHeight = UITableView.automaticDimension
+        estimatedRowHeight = height
+    }
+    
+    
     /* MARK: - KDSComponent */
     
-    /// Configura a view
     final public func initialSetup() {
         activateConstraints()
         
         clipsToBounds = true
         layer.masksToBounds = true
+        
+        registerNativeCell()
+    }
+    
+    private func registerNativeCell() {
+        registerCell(for: KDSNativeCell.self)
     }
 }

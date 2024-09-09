@@ -18,4 +18,9 @@ public extension String {
     var asURL: URL? {
         URL(string: self)
     }
+    
+    
+    var toInt: Int {
+        Int(self).defaultValue
+    }
 }

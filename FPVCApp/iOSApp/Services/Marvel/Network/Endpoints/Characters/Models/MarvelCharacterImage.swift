@@ -8,19 +8,25 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
+import KingsDS
+
 
 struct MarvelCharacterImage: CustomStringConvertible {
     var url: String?
     var imageName: String
-    var fileName: String
+    var image: KDSImage?
     
     
-    init(url: String? = nil, fileNameFromId id: Int) {
+    // MARK: - Construtores
+    init(url: String? = nil) {
         self.url = url
         
         let imageNameFromUrl = url?.components(separatedBy: "/").last
         imageName = imageNameFromUrl.defaultValue
-        fileName = "\(id)"
+    }
+    
+    init(imageName: String) {
+        self.imageName = imageName
     }
     
     
@@ -30,7 +36,7 @@ struct MarvelCharacterImage: CustomStringConvertible {
         MarvelCharacterImage {
                 url: \(url.string)
                 imageName: \(imageName)
-                fileName: \(fileName)
+                image: \(image.isNotNil)
             }
         """
     }

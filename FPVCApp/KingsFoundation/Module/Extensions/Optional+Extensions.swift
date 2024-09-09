@@ -47,6 +47,10 @@ public extension Optional where Wrapped == String {
     var defaultValue: String {
         self ?? ""
     }
+    
+    var hasData: Bool {
+        isNotNil && self?.isEmpty == false
+    }
 }
 
 

@@ -12,6 +12,8 @@ import KingsFoundation
 
 class HomeViewController: UIViewController {
     
+    override var controllerTitle: String? { "Personagens" }
+    
     lazy var screen: HomeScreen = {
         let view = HomeScreen()
         charactersHandler = CharacterCollectionHandler(collection: view.characterCollection)
@@ -29,6 +31,16 @@ class HomeViewController: UIViewController {
     var charactersHandler: CharacterCollectionHandler?
     
     
+    // MARK: - Construtores
+    init() {
+        super.init(nibName: nil, bundle: nil)
+        setupTabBar(image: KDSImage(asset: KDSIcons.tabCharacters))
+    }
+    
+    required init?(coder: NSCoder) { nil }
+    
+    
+    
     // MARK: - Ciclo de Vida
     override func loadView() {
         view = screen
@@ -42,17 +54,22 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupNavigation()
+        charactersHandler?.updateLastSelectedCellIfNeeded()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        FavoriteManager.shared.saveChangesIfNeeded()
     }
     
     
     
     // MARK: - Configurações
-    
     private func setupNavigation() {
-        navigationItem.title = "Personagens"
+        navigationItem.title = controllerTitle
         navigationItem.largeTitleDisplayMode = .always
     }
-    
     
     
     private func fetchCharacters() {
@@ -81,6 +98,8 @@ class HomeViewController: UIViewController {
             validData.appendIfExists(cellData)
         }
         
+        FavoriteManager.shared.updateDataFromRequest(&validData)
+        
         print("[Home] Dados para serem apresentados: \(validData.count)")
         print("[Home] Dados: \(validData)")
         charactersHandler?.newData(validData)
@@ -88,11 +107,16 @@ class HomeViewController: UIViewController {
 }
 
 
-
+// MARK: - + CharacterCollectionHandlerDelegate
 extension HomeViewController: CharacterCollectionHandlerDelegate {
     
     func fetchMoreData() {
         api.prepareForPagination()
         fetchCharacters()
+    }
+    
+    func routeToInfos(with data: MarvelCharacterData) {
+        let controller = InfosController(characterInfos: data)
+        navigationController?.pushViewController(controller, animated: true)
     }
 }

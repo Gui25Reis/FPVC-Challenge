@@ -23,7 +23,6 @@ public extension Array {
         0..<count
     }
     
-    
     @discardableResult
     mutating func appendIfExists(_ newElement: Element?) -> Bool {
         guard let newElement else { return false }

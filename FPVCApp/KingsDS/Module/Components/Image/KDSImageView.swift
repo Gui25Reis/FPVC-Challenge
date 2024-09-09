@@ -39,6 +39,8 @@ open class KDSImageView: UIImageView, KDSComponent, KDSSpinnerHandler {
     var spinnerStyle: LoadingSpinnerStyle?
     
     private(set) public var imageVM: KDSImageViewModel?
+    
+    public var kdsImage: KDSImage?
 
     
     // MARK: - Construtores
@@ -54,10 +56,17 @@ open class KDSImageView: UIImageView, KDSComponent, KDSSpinnerHandler {
     
     public convenience init(kdsImage: KDSImage?) {
         self.init()
+        self.kdsImage = kdsImage
         setupImage(with: kdsImage)
     }
     
     required public init?(coder: NSCoder) { nil }
+    
+    // Destrutor
+    deinit {
+        kdsImage?.cleanObject()
+        kdsImage = nil
+    }
     
     
     // MARK: - Ciclo de Vida
@@ -70,11 +79,13 @@ open class KDSImageView: UIImageView, KDSComponent, KDSSpinnerHandler {
     
     // MARK: - Encapsulamento
     final public func setupImage(with image: KDSImage?) {
+        kdsImage = image
         prepare(image: image?.imageCreated)
     }
     
     final public func prepare(image: UIImage?) {
         guard let image else { return }
+        kdsImage = KDSImage(image: image)
         
         image.prepareForDisplay { image in
             KDSMainDispatcher.onMainThread { self.image = image }

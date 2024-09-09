@@ -52,7 +52,7 @@ final class MarvelCharacterAPI: MarvelAPI, APIHandler {
     }
     
     private func addFixedParamters() {
-        addParameter(data: .limit("80"))
+//        addParameter(data: .limit("80"))
     }
     
     private func updatePaginationInfo(with data: SuccessModel) {
