@@ -67,6 +67,7 @@ class HomeViewController: UIViewController {
     
     // MARK: - Configurações
     private func setupNavigation() {
+        showTabBar()
         navigationItem.title = controllerTitle
         navigationItem.largeTitleDisplayMode = .always
     }
@@ -117,6 +118,7 @@ extension HomeViewController: CharacterCollectionHandlerDelegate {
     
     func routeToInfos(with data: MarvelCharacterData) {
         let controller = InfosController(characterInfos: data)
+        navigationController?.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(controller, animated: true)
     }
 }

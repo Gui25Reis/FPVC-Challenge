@@ -20,4 +20,12 @@ extension UIViewController {
         tabBarItem.title = title ?? controllerTitle
         tabBarItem.image = image.imageCreated
     }
+    
+    public func hideTabBar() {
+        tabBarController?.tabBar.isHidden = true
+    }
+    
+    public func showTabBar() {
+        tabBarController?.tabBar.isHidden = false
+    }
 }

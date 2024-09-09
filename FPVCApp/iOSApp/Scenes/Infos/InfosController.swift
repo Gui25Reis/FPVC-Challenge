@@ -52,6 +52,11 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
         setupNavigation()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        FavoriteManager.shared.saveChangesIfNeeded()
+    }
+    
     
     // MARK: - InfosCharacterTableHandlerDelegate
     func shareImage(_ image: KDSImage?) {
@@ -76,6 +81,7 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
     
     // MARK: - Configurações
     private func setupNavigation() {
+        hideTabBar()
         navigationItem.title = "Infos"
         navigationItem.largeTitleDisplayMode = .never
         
@@ -118,5 +124,6 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
         characterInfos.isFavorited.toggle()
         let favoriteIcon = KDSIcons.favoriteIcon(basedOn: characterInfos.isFavorited)
         button.kdsImage = KDSImage(asset: favoriteIcon)
+        FavoriteManager.shared.didChangeFavoriteStatus(data: characterInfos)
     }
 }
