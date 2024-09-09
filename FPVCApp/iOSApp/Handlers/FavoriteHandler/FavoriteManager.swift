@@ -24,7 +24,8 @@ class FavoriteManager {
     
     var unsavedChanges = Set<Int>()
     
-    var allData = [MarvelCharacterData]()
+    var allData = [Int:MarvelCharacterData]()
+    var isDatabaseEmpty = false
     
     let dispatcher = KFDispatcherQueue(provider: DispatchQueue.global(qos: .background))
     
@@ -42,7 +43,7 @@ class FavoriteManager {
     
     func checkIfIsFavorited(id: Int) -> Bool {
         getAllDataIfNeeded()
-        return cache.retrieve(forKey: id.toString).isNotNil
+        return allData[id]?.isFavorited == true
     }
     
     func getFavoritedCharacters() -> [MarvelCharacterData] {
@@ -79,7 +80,7 @@ class FavoriteManager {
         unsavedChanges.removeAll()
         dispatcher.async {
             self.persistent.saveChanges()
-            self.allData = self.persistent.retrieveAll()
+            self.getAllDataIfNeeded(isNeeded: true)
         }
     }
     
@@ -98,8 +99,13 @@ class FavoriteManager {
         }
     }
     
-    private func getAllDataIfNeeded() {
-        guard allData.isEmpty else { return }
-        allData = persistent.retrieveAll()
+    private func getAllDataIfNeeded(isNeeded: Bool = false) {
+        guard allData.isEmpty || isNeeded else { return }
+        
+        if isDatabaseEmpty && !isNeeded { return }
+        
+        let dataSaveOnCoreDate = persistent.retrieveAll()
+        dataSaveOnCoreDate.forEach { allData[$0.id] = $0 }
+        isDatabaseEmpty = dataSaveOnCoreDate.isEmpty
     }
 }

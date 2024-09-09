@@ -76,21 +76,21 @@ class MarvelCharacterData: CustomStringConvertible {
     }
     
     
-//    init(dbModel: MDBCharacter) {
-//        id = dbModel.dataId.toInt
-//        name = dbModel.name
-//        
-//        infos = ("Descrição", dbModel.infos)
-//        
-//        modified = dbModel.modified
-//        image = MarvelCharacterImage(imageName: dbModel.image)
-//        comics = ("Comics", dbModel.comics)
-//        series = ("Series", dbModel.series)
-//        stories = ("Stories", dbModel.stories)
-//        events = ("Events", dbModel.events)
-//        
-//        isFavorited = true
-//    }
+    init(dbModel: MDBCharacter) {
+        id = dbModel.dataId.toInt
+        name = dbModel.name
+        
+        infos = ("Descrição", dbModel.infos)
+        
+        modified = dbModel.modified
+        image = MarvelCharacterImage(imageName: dbModel.image)
+        comics = ("Comics", dbModel.comics)
+        series = ("Series", dbModel.series)
+        stories = ("Stories", dbModel.stories)
+        events = ("Events", dbModel.events)
+        
+        isFavorited = true
+    }
     
     
     // MARK: - CustomStringConvertible
