@@ -118,7 +118,7 @@ extension HomeViewController {
     }
     
     func routeToInfos(with data: MarvelCharacterData) {
-        let controller = InfosController(characterInfos: data)
+        let controller = InfosFactory.makeControler(data: data)
         navigationController?.pushViewController(controller, animated: true)
     }
 }

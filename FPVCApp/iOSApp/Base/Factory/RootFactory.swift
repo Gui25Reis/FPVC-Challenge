@@ -18,7 +18,7 @@ enum RootFactory {
         let tab = createTab()
         
         let homeController = HomeFactory.makeController()
-        let favoriteController = FavoriteController()
+        let favoriteController = FavoriteFactory.makeController()
         
         tab.viewControllers = [
             createNavigation(for: homeController),
@@ -55,7 +55,6 @@ enum RootFactory {
         appearance.backgroundColor = mainColor
         
         let titleAttribute = [
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold),
             NSAttributedString.Key.foregroundColor: UIColor.white
         ]
         appearance.titleTextAttributes = titleAttribute

@@ -12,17 +12,9 @@ import UIKit
 import KingsDS
 
 
-protocol InfosCharacterCellDelegate: AnyObject {
-    
-    func shareImage(_ image: UIImage?)
-}
-
-
-class InfosCharacterCell: UITableViewCell, KDSTableCellType, KDSViewCode {
+class ImageCharacterCell: UITableViewCell, KDSTableCellType, KDSViewCode {
         
     static let identifier = "IdCharacterCell"
-    
-    weak var delegate: InfosCharacterCellDelegate?
     
     
     /* Componentes UI */

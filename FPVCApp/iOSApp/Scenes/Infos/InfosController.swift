@@ -13,24 +13,25 @@ import KingsDS
 import KingsFoundation
 
 
-class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
+protocol InfosPresenter: AnyObject {
     
-    lazy var screen: InfosScreen = {
-        let view = InfosScreen()
-        return view
-    }()
+    var screen: InfosScreen { get set }
     
-    let characterInfos: MarvelCharacterData
+    func show(controller: UIViewController)
+}
+
+
+class InfosController: UIViewController, InfosPresenter {
     
-    var tableHandler: InfosCharacterTableHandler?
-    
-    var dispatcher = KFDispatcherQueue(provider: DispatchQueue.main)
-    var accessRequest: KFAccessRequestLogic = KFAccessRequest.shared
+    lazy var screen = InfosScreen()
+        
+    var dispatcher: KFDispatcherQueue?
+    let viewModel: InfosViewModelLogic
     
     
     // MARK: - Construtores
-    init(characterInfos: MarvelCharacterData) {
-        self.characterInfos = characterInfos
+    init(viewModel: InfosViewModelLogic) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -44,11 +45,7 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createAndSetupTable()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        viewModel.setupTable()
         setupNavigation()
     }
     
@@ -58,23 +55,10 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
     }
     
     
-    // MARK: - InfosCharacterTableHandlerDelegate
-    func shareImage(_ image: KDSImage?) {
-        accessRequest.checkPermission(for: .gallery) { [weak self] response in
-            guard let self else { return }
-            
-            guard let alert = response.alert else {
-                self.shareWithActivity(data: image?.imageCreated)
-                return
-            }
-            
-            let okAction = UIAlertAction(title: "Ok", style: .default) { _ in
-                self.shareWithActivity(data: image?.imageCreated)
-            }
-            alert.addAction(okAction)
-            self.dispatcher.onMainThread {
-                self.present(alert, animated: true)
-            }
+    // MARK: - InfosPresenter
+    func show(controller: UIViewController) {
+        dispatcher?.onMainThread {
+            self.present(controller, animated: true)
         }
     }
     
@@ -88,12 +72,10 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
         let shareButtom = KDSNavButton(
             image: KDSImage(asset: KDSIcons.share),
             color: KDSColors.accentButton,
-            action: { [weak self] _ in
-                self?.shareWithActivity(data: self?.characterInfos.toShare)
-            }
+            action: { [weak self] _ in self?.viewModel.shareInfos() }
         )
         
-        let favoriteIcon = KDSIcons.favoriteIcon(basedOn: characterInfos.isFavorited)
+        let favoriteIcon = KDSIcons.favoriteIcon(basedOn: viewModel.retrieveFavoriteStatus())
         let favoriteButton = KDSNavButton(
             image: KDSImage(asset: favoriteIcon),
             color: KDSColors.accentButton,
@@ -104,26 +86,9 @@ class InfosController: UIViewController, InfosCharacterTableHandlerDelegate {
         navigationItem.rightBarButtonItems = [shareButtom, favoriteButton]
     }
     
-    private func createAndSetupTable() {
-        tableHandler = InfosCharacterTableHandler(
-            table: screen.tableView, data: characterInfos
-        )
-        tableHandler?.delegate = self
-    }
-    
-    private func shareWithActivity(data: Any?) {
-        guard let data else { return }
-        let activityController = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-        
-        dispatcher.onMainThread {
-            self.present(activityController, animated: true)
-        }
-    }
-    
     private func favoriteAction(at button: KDSNavButton) {
-        characterInfos.didChangeFavoriteStatus()
-        let favoriteIcon = KDSIcons.favoriteIcon(basedOn: characterInfos.isFavorited)
+        let newStatus = viewModel.didChangeFavoriteStatus()
+        let favoriteIcon = KDSIcons.favoriteIcon(basedOn: newStatus)
         button.kdsImage = KDSImage(asset: favoriteIcon)
-        FavoriteManager.shared.didChangeFavoriteStatus(data: characterInfos)
     }
 }

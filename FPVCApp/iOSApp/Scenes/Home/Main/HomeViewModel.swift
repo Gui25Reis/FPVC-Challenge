@@ -122,7 +122,7 @@ extension HomeViewModel {
 extension HomeViewModel: HomeCollectionHandlerDelegate {
     
     func routeToInfos(with data: MarvelCharacterData) {
-        let controller = InfosController(characterInfos: data)
+        let controller = InfosFactory.makeControler(data: data)
         mainBinding?.navigationController?.pushViewController(controller, animated: true)
     }
 }

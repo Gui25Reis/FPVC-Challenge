@@ -13,17 +13,17 @@ import KingsDS
 import KingsFoundation
 
 
-protocol FavoriteCharacterCollectionHandlerDelegate: AnyObject {
+protocol FavoriteCollectionHandlerDelegate: AnyObject {
     
     func routeToInfos(with data: MarvelCharacterData)
 }
 
 
-class FavoriteCharacterCollectionHandler: NSObject, KDSCollectionHandler, KDSCollectionDelegate {
+class FavoriteCollectionHandler: NSObject, KDSCollectionHandler, KDSCollectionDelegate {
     
     unowned let collection: KDSCollection
     
-    weak var delegate: FavoriteCharacterCollectionHandlerDelegate?
+    weak var delegate: FavoriteCollectionHandlerDelegate?
     
     var data = [MarvelCharacterData]()
     
@@ -83,8 +83,24 @@ class FavoriteCharacterCollectionHandler: NSObject, KDSCollectionHandler, KDSCol
 }
 
 
+// MARK: - + KDSCollectionHandler
+extension FavoriteCollectionHandler {
+    
+    func registerCell(at collection: KDSCollection) {
+        FavoriteCharacterCell.register(at: collection)
+    }
+}
+
+
+// MARK: - + KDSCollectionDelegate
+extension FavoriteCollectionHandler {
+    
+    var hasDataInCollection: Bool { data.isNotEmpty }
+}
+
+
 // MARK: - + Data Source
-extension FavoriteCharacterCollectionHandler {
+extension FavoriteCollectionHandler {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
@@ -104,28 +120,11 @@ extension FavoriteCharacterCollectionHandler {
 
 
 // MARK: - + Delegate
-extension FavoriteCharacterCollectionHandler {
+extension FavoriteCollectionHandler {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         lastCellSelected = indexPath
         let infos = data[indexPath.row]
         delegate?.routeToInfos(with: infos)
     }
-}
-
-
-
-// MARK: - + KDSCollectionHandler
-extension FavoriteCharacterCollectionHandler {
-    
-    func registerCell(at collection: KDSCollection) {
-        FavoriteCharacterCell.register(at: collection)
-    }
-}
-
-
-// MARK: - + KDSCollectionDelegate
-extension FavoriteCharacterCollectionHandler {
-    
-    var hasDataInCollection: Bool { data.isNotEmpty }
 }

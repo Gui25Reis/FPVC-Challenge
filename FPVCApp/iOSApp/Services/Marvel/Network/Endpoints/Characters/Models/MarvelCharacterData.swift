@@ -55,6 +55,20 @@ class MarvelCharacterData: CustomStringConvertible {
         self.events = ("Events", "\(events.defaultValue)")
     }
     
+    convenience init() {
+        self.init(
+            id: 1010,
+            name: "Nome",
+            infos: nil,
+            modified: nil,
+            imageURL: nil,
+            comics: nil,
+            series: nil,
+            stories: nil,
+            events: nil
+        )
+    }
+    
     
     convenience init?(from data: MarvelCharactersModels.CharacterInfos) {
         let id = data.id

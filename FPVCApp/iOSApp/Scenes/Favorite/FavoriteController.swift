@@ -13,18 +13,19 @@ import KingsDS
 import KingsFoundation
 
 
-class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDelegate {
+protocol FavoritePresenter {
+     
+    func route(to controller: UIViewController)
+}
+
+
+class FavoriteController: UIViewController, FavoritePresenter {
     
     override var controllerTitle: String? { "Favoritos" }
     
-    lazy var screen: FavoriteScreen = {
-        let view = FavoriteScreen()
-        return view
-    }()
+    lazy var screen = FavoriteScreen()
     
-    
-    var collectionHandler: FavoriteCharacterCollectionHandler?
-    var notificator = KFNotificator(provider: NotificationCenter.default)
+    var viewModel: FavoriteViewModelLogic?
     
     
     // MARK: - Construtores
@@ -35,10 +36,6 @@ class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDe
     
     required init?(coder: NSCoder) { nil }
     
-    deinit {
-        notificator.unregister(self, key: .coreDateSaving)
-    }
-    
     
     // MARK: - Ciclo de Vida
     override func loadView() {
@@ -47,14 +44,12 @@ class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupCollection()
-        notificator.register(self, action: #selector(updateTableData), key: .coreDateSaving)
+        viewModel?.setupCollection(screen.characterCollection)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupNavigation()
-        updateTableData()
+        viewModel?.updateTableData()
     }
     
         
@@ -64,25 +59,13 @@ class FavoriteController: UIViewController, FavoriteCharacterCollectionHandlerDe
         navigationItem.title = controllerTitle
         navigationItem.largeTitleDisplayMode = .always
     }
-    
-    @objc private func updateTableData() {
-        let newData = FavoriteManager.shared.getFavoritedCharacters()
-        collectionHandler?.newData(newData)
-    }
-    
-    private func setupCollection() {
-        collectionHandler = FavoriteCharacterCollectionHandler(collection: screen.characterCollection)
-        collectionHandler?.delegate = self
-        updateTableData()
-    }
 }
 
 
 // MARK: - + FavoriteCharacterCollectionHandlerDelegate
 extension FavoriteController {
     
-    func routeToInfos(with data: MarvelCharacterData) {
-        let controller = InfosController(characterInfos: data)
+    func route(to controller: UIViewController) {
         navigationController?.pushViewController(controller, animated: true)
     }
 }

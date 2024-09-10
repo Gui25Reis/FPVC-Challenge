@@ -13,25 +13,21 @@ import KingsDS
 import KingsFoundation
 
 
-protocol InfosCharacterTableHandlerDelegate: AnyObject {
+protocol InfosTableHandlerDelegate: AnyObject {
     
     func shareImage(_ image: KDSImage?)
 }
 
 
-final class InfosCharacterTableHandler: NSObject, KDSTableHandler {
+final class InfosTableHandler: NSObject, KDSTableHandler {
     
-    weak var delegate: InfosCharacterTableHandlerDelegate?
+    weak var delegate: InfosTableHandlerDelegate?
     
     unowned let table: KDSTable
     
-    var data: MarvelCharacterData!
+    var data = MarvelCharacterData()
     
     
-    // Handlers
-    let dispatcher = KFDispatcherQueue(provider: DispatchQueue.main)
-    
-        
     // MARK: - Construtores
     required init(table: KDSTable) {
         self.table = table
@@ -48,8 +44,8 @@ final class InfosCharacterTableHandler: NSObject, KDSTableHandler {
     // MARK: - Configurações
     
     // MARK: Células
-    private func createImageCell(at indexPath: IndexPath) -> InfosCharacterCell? {
-        let cell = table.reusableCell(as: InfosCharacterCell.self, for: indexPath)
+    private func createImageCell(at indexPath: IndexPath) -> ImageCharacterCell? {
+        let cell = table.reusableCell(as: ImageCharacterCell.self, for: indexPath)
         cell?.setupCell(with: data)
         return cell
     }
@@ -86,7 +82,7 @@ final class InfosCharacterTableHandler: NSObject, KDSTableHandler {
         guard let _ = configuration.identifier as? String else { return nil }
 
         let indexPath = IndexPath(row: 0, section: 0)
-        guard let cell = table.cellForRow(at: indexPath) as? InfosCharacterCell else { return nil }
+        guard let cell = table.cellForRow(at: indexPath) as? ImageCharacterCell else { return nil }
 
         let parameters = UIPreviewParameters()
         parameters.backgroundColor = .clear
@@ -97,8 +93,17 @@ final class InfosCharacterTableHandler: NSObject, KDSTableHandler {
 }
 
 
+// MARK: - + KDSCollectionHandler
+extension InfosTableHandler {
+    
+    func registerCell(at table: KDSTable) {
+        ImageCharacterCell.register(at: table)
+    }
+}
+
+
 // MARK: - + Data Source
-extension InfosCharacterTableHandler {
+extension InfosTableHandler {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -115,9 +120,9 @@ extension InfosCharacterTableHandler {
             2: createAppearanceCell(at: indexPath),
         ]
         
-        let cell = dict[indexPath.section] ?? UITableViewCell()
+        let cell = dict[indexPath.section]?.defaultValue
         cell?.selectionStyle = .none
-        return cell ?? UITableViewCell()
+        return cell.defaultValue
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -127,7 +132,7 @@ extension InfosCharacterTableHandler {
 
 
 // MARK: - + Delegate
-extension InfosCharacterTableHandler {
+extension InfosTableHandler {
     
     /* Footer */
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? { nil }
@@ -149,7 +154,7 @@ extension InfosCharacterTableHandler {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard indexPath.section == 0 else { return }
-        let cell = table.reusableCell(as: InfosCharacterCell.self, for: indexPath)
+        let cell = table.reusableCell(as: ImageCharacterCell.self, for: indexPath)
         cell?.backgroundColor = .clear
         tableView.deselectRow(at: indexPath, animated: false)
     }
@@ -176,14 +181,5 @@ extension InfosCharacterTableHandler {
     
     func tableView(_ tableView: UITableView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return createPreview(for: configuration)
-    }
-}
-
-
-// MARK: - + KDSCollectionHandler
-extension InfosCharacterTableHandler {
-    
-    func registerCell(at table: KDSTable) {
-        InfosCharacterCell.register(at: table)
     }
 }
