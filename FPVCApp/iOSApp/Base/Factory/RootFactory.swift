@@ -17,7 +17,7 @@ enum RootFactory {
     static func makeRoot() -> UIViewController {
         let tab = createTab()
         
-        let homeController = HomeViewController()
+        let homeController = HomeFactory.makeController()
         let favoriteController = FavoriteController()
         
         tab.viewControllers = [

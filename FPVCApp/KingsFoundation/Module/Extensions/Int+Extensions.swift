@@ -16,4 +16,8 @@ public extension Int {
     var toString: String {
         "\(self)"
     }
+    
+    var isOne: Bool {
+        self == 1
+    }
 }

@@ -39,11 +39,10 @@ final class MarvelCharacterAPI: MarvelAPI, APIHandler {
         addParameter(data: .offset("\(offSet)"))
     }
     
-    func saveResponseIfNeeded(_ data: SuccessModel) {
-        updatePaginationInfo(with: data)
+    func saveResponseIfNeeded(_ data: SuccessModel?) {
         cleanParameters()
+        updatePaginationInfo(with: data)
     }
-    
     
     /* Configurações */
     private func cleanParameters() {
@@ -52,14 +51,12 @@ final class MarvelCharacterAPI: MarvelAPI, APIHandler {
     }
     
     private func addFixedParamters() {
-//        addParameter(data: .limit("80"))
+        addParameter(data: .limit("90"))
     }
     
-    private func updatePaginationInfo(with data: SuccessModel) {
+    private func updatePaginationInfo(with data: SuccessModel?) {
+        guard let data else { return }
         pagination.limitePerRequest = (data.data?.limit).defaultValue
         pagination.available = (data.data?.total).defaultValue
-        
-        let offSet = data.data?.offset
-        pagination.didAsked[offSet.defaultValue] = true
     }
 }

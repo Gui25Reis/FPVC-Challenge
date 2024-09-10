@@ -11,7 +11,7 @@
 import Foundation
 
 
-enum ImagesDownloaderErrors: Error {
+public enum ImagesDownloaderErrors: Error {
     case badURL
     case noData
     case badCreation

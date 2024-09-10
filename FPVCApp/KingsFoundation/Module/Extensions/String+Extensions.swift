@@ -27,6 +27,9 @@ public extension String {
         Int(self).defaultValue
     }
     
+    func isDifferent(then text: String) -> Bool {
+        self != text
+    }
     
     func toDate(with formatType: KDSDateFormats) -> Date? {
         let dateFormatter = DateFormatter()

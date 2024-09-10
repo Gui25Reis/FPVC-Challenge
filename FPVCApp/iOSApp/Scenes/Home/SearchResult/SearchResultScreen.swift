@@ -13,16 +13,7 @@ import FPVCAssets
 import UIKit
 
 
-protocol HomeScreenDelegate: AnyObject {
-    
-    func tryAgainAction()
-}
-
-
-class HomeScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
-    
-    weak var delegate: HomeScreenDelegate?
-    
+class SearchResultScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
     
     /* Componentes UI */
     lazy var emptyView: KDSEmptyView = {
@@ -32,23 +23,17 @@ class HomeScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
     
     lazy var emptyViewVM: KDSEmptyViewVM = {
         KDSEmptyViewVM(
-            image: KDSImage(asset: FPVCAsset.badRequest),
-            title: "Algo de errado não está certo!",
-            message: "Não foi possível carregar os personagens! Verifique a sua conexão e tente novamente.",
-            buttomVM: KDSButtonViewModel(
-                title: "Tentar novamente",
-                action: { [weak self] _ in
-                    print("Cliquei para tentar novamente | self nil?: \(self.isNil)")
-                    self?.delegate?.tryAgainAction()
-                }
-            )
+            image: KDSImage(asset: FPVCAsset.noSearchResults),
+            title: "Nenhum resultado",
+            message: "Nenhum dado foi encontrado para a sua pesquisa."
         )
     }()
     
     
-    lazy var characterCollection: KDSCollection = {
+    lazy var collection: KDSCollection = {
         let view = KDSCollection()
         view.removeScrollIndicators()
+        view.isAllowedToShowSpinner = false
         view.backgroundColor = .clear
         
         let defaultSpace: CGFloat = 10
@@ -67,14 +52,23 @@ class HomeScreen: UIView, KDSViewCode, KDSEmptyViewHandler {
     }
     
     
+    // MARK: - Encapsulamento
+    
+    func prepareToTryAgain() {
+        hideEmptyView()
+        collection.isAllowedToShowSpinner = true
+        collection.showSpinner(style: .large)
+    }
+    
+    
     // MARK: - KDSViewCode
     func setupHierarchy() {
-        addSubview(characterCollection)
+        addSubview(collection)
         addSubview(emptyView)
     }
     
     func setupConstraints() {
-        let constraints = characterCollection.strechToBounds(of: self)
+        let constraints = collection.strechToBounds(of: self)
         NSLayoutConstraint.activate(constraints)
     }
     

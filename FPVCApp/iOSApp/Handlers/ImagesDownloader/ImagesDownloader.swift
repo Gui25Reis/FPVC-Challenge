@@ -14,7 +14,7 @@ import KingsStorage
 import KingsDS
 
 
-protocol ImagesDownloaderDelegate: AnyObject {
+public protocol ImagesDownloaderDelegate: AnyObject {
     
     func didDownloadImageSuccessfully(image: KDSImage, _ dict: [String: Any])
     
@@ -22,39 +22,24 @@ protocol ImagesDownloaderDelegate: AnyObject {
 }
 
 
-class ImagesDownloader {
+public protocol ImagesDownloaderLogic {
     
-    weak var delegate: ImagesDownloaderDelegate?
+    func downloadFromWeb(imageURL: String?, dict: [String: Any]) -> KDSImage?
     
-    let dispatcher = KFDispatcherQueue(provider: DispatchQueue.global(qos: .background))
-    
-    let network = NetworkHandler<ImageAPI>()
-    
-    let cache = NSCacheType<KDSImage>()
-    
-    
-    func downloadLocally(imageURL: String?, dict: [String: Any] = [:]) {
-        dispatcher.async {
-            guard let imageURL = imageURL?.asURL else {
-                return self.finishWith(error: .badURL, dict)
-            }
-            
-            let data = try? Data(contentsOf: imageURL)
-            self.buildImage(with: data, dict: dict)
-        }
-    }
-    
-    func downloadFromWeb(imageURL: String?, dict: [String: Any] = [:]) -> KDSImage? {
-        let imageCached = retrieveFromCacheIfExistis(dict)
+    func buildImage(with data: Data?, _ dict: [String: Any])
+}
+
+
+open class ImagesDownloader: ImagesDownloaderLogic {
         
-        if let imageCached {
-//            print("[ImagesDownloader] Imagem cacheada!")
-            return imageCached
-        }
-        
-        defer { donwload(imageURL: imageURL, dict) }
-        return nil
-    }
+    public weak var delegate: ImagesDownloaderDelegate?
+    
+    var dispatcher = KFDispatcherQueue(provider: DispatchQueue.global(qos: .background))
+    
+    var network = NetworkHandler<ImageAPI>()
+    
+    var cache = NSCacheType<KDSImage>()
+    
     
     private func donwload(imageURL: String?, _ dict: [String: Any] = [:]) {
         guard let imageURL else { return finishWith(error: .badURL, dict) }
@@ -73,11 +58,50 @@ class ImagesDownloader {
                 }
             }
             
-            self?.buildImage(with: data, dict: dict)
+            self?.buildImage(with: data, dict)
         }
     }
     
-    func buildImage(with data: Data?, dict: [String: Any] = [:]) {
+    
+    private func finishWith(image: KDSImage, _ dict: [String: Any]) {
+        delegate?.didDownloadImageSuccessfully(image: image, dict)
+    }
+    
+    private func finishWith(error: ImagesDownloaderErrors, _ dict: [String: Any]) {
+        delegate?.didDownloadImageFailure(error: error, dict)
+    }
+    
+    
+    // MARK: Cache
+    private func saveOnCache(_ image: KDSImage, _ dict: [String: Any]) {
+        let fileName = dict["fileName"] as? String
+        guard let fileName else { return }
+        cache.save(image, forKey: fileName)
+    }
+    
+    private func retrieveFromCacheIfExistis(_ dict: [String: Any]) -> KDSImage? {
+        let fileName = dict["fileName"] as? String
+        guard let fileName else { return nil }
+        return cache.retrieve(forKey: fileName)
+    }
+}
+
+
+// MARK: - + ImagesDownloaderLogic
+public extension ImagesDownloader {
+    
+    func downloadFromWeb(imageURL: String?, dict: [String: Any]) -> KDSImage? {
+        let imageCached = retrieveFromCacheIfExistis(dict)
+        
+        if let imageCached {
+            return imageCached
+        }
+        
+        defer { donwload(imageURL: imageURL, dict) }
+        return nil
+    }
+    
+    func buildImage(with data: Data?, _ dict: [String: Any]) {
         guard let data else {
             return finishWith(error: .noData, dict)
         }
@@ -94,29 +118,5 @@ class ImagesDownloader {
             self.saveOnCache(image, dict)
             self.finishWith(image: image, dict)
         }
-    }
-    
-    func finishWith(error: ImagesDownloaderErrors, _ dict: [String: Any]) {
-//        print("[ImagesDownloader] Erro no download da imagem: \(error.desciption)")
-        delegate?.didDownloadImageFailure(error: error, dict)
-    }
-    
-    func finishWith(image: KDSImage, _ dict: [String: Any]) {
-//        print("[ImagesDownloader] Success no download da imagem!")
-        delegate?.didDownloadImageSuccessfully(image: image, dict)
-    }
-    
-    
-    // MARK: Cache
-    func saveOnCache(_ image: KDSImage, _ dict: [String: Any]) {
-        let fileName = dict["fileName"] as? String
-        guard let fileName else { return }
-        cache.save(image, forKey: fileName)
-    }
-    
-    func retrieveFromCacheIfExistis(_ dict: [String: Any]) -> KDSImage? {
-        let fileName = dict["fileName"] as? String
-        guard let fileName else { return nil }
-        return cache.retrieve(forKey: fileName)
     }
 }

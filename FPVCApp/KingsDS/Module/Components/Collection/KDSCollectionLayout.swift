@@ -9,6 +9,7 @@
 //
 
 import UIKit
+import KingsFoundation
 
 
 open class KDSCollectionLayout: UICollectionViewFlowLayout {
@@ -30,5 +31,17 @@ open class KDSCollectionLayout: UICollectionViewFlowLayout {
             horizontalSpace = beetweenSpace
             verticalSpace = beetweenSpace
         }
+    }
+    
+    public func calculateCellWidth(_ collection: KDSCollection, qtdCellsInRow: Int) -> CGSize {
+        let cellRowCount = CGFloat(qtdCellsInRow)
+        
+        var hSpace = collection.padding.horizontals
+        if !qtdCellsInRow.isOne {
+            hSpace += (cellRowCount-1) * beetweenSpace
+        }
+        
+        let width = (collection.bounds.width - hSpace) / cellRowCount
+        return CGSize(width: width, height: width)
     }
 }

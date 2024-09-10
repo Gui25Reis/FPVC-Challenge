@@ -14,7 +14,7 @@ import KingsFoundation
 import FPVCAssets
 
 
-protocol CharacterCollectionHandlerDelegate: AnyObject {
+protocol HomeCollectionHandlerDelegate: AnyObject {
     
     func fetchMoreData()
     
@@ -22,19 +22,31 @@ protocol CharacterCollectionHandlerDelegate: AnyObject {
 }
 
 
-class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownloaderDelegate, KDSCollectionDelegate, CharacterFooterDelegate, CharacterCellDelegate {
+protocol HomeCollectionHandlerLogic {
+    
+    var canLoadMoreData: Bool { get set }
+    
+    func cleanData()
+    
+    func newData(_ newData: [MarvelCharacterData])
+    
+    func updateLastSelectedCellIfNeeded()
+}
+
+
+class HomeCollectionHandler: NSObject, HomeCollectionHandlerLogic, KDSCollectionHandler, ImagesDownloaderDelegate, KDSCollectionDelegate, CharacterFooterDelegate, CharacterCellDelegate {
     
     unowned let collection: KDSCollection
     
-    weak var delegate: CharacterCollectionHandlerDelegate?
+    weak var delegate: HomeCollectionHandlerDelegate?
     
     var data = [MarvelCharacterData]()
     
     
     // Handlers
-    let dispatcher = KFDispatcherQueue(provider: DispatchQueue.main)
+    lazy var dispatcher = KFDispatcherQueue(provider: DispatchQueue.main)
     
-    lazy var imgDownloader: ImagesDownloader = {
+    lazy var imgDownloader: ImagesDownloaderLogic = {
         let handler = ImagesDownloader()
         handler.delegate = self
         return handler
@@ -45,6 +57,8 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     var isLoadingNewData = false
     
     var lastCellSelected: IndexPath?
+    
+    var canLoadMoreData = false
     
     
     // MARK: - Construtores
@@ -58,6 +72,15 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
     
     
     // MARK: - Encapsulamento
+    func cleanData() {
+        isLoadingNewData = false
+        
+        dispatcher.onMainThread {
+            self.data = []
+            self.collection.updateData()
+        }
+    }
+    
     func newData(_ newData: [MarvelCharacterData]) {
         isLoadingNewData = false
         
@@ -69,14 +92,6 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
             
             self.showEmptyViewIfNeeded()
             self.realoadFooterIfNeeded()
-        }
-    }
-    
-    func temporaryNewData(_ data: [MarvelCharacterData]) {
-        dispatcher.onMainThread {
-            self.data += data
-            self.collection.updateData()
-            self.collection.removeSpinner()
         }
     }
     
@@ -167,7 +182,7 @@ class CharacterCollectionHandler: NSObject, KDSCollectionHandler, ImagesDownload
 
 
 // MARK: - + Data Source
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
@@ -179,29 +194,28 @@ extension CharacterCollectionHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellRowCount: CGFloat = 2
-        
-        let hSpace = collection.layout.horizontalSpace + collection.padding.horizontals
-        
-        let totalSpacing: CGFloat = (cellRowCount - 1) * hSpace
-        let width = (collectionView.bounds.width - totalSpacing) / cellRowCount
-        let height = width * 1.2
-        return CGSize(width: width, height: height)
+        var size = collection.layout.calculateCellWidth(collection, qtdCellsInRow: 2)
+        size.height = size.width * 1.2
+        return size
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let defaultView = UICollectionReusableView()
-        guard KDSCollectionReusableViews(kind: kind) == .footer else { return defaultView }
-        return createFooter(at: indexPath) ?? defaultView
+        
+        let kindType = KDSCollectionReusableViews(kind: kind)
+        guard kindType == .footer else { return defaultView }
+        
+        let footer = createFooter(at: indexPath)
+        return footer ?? defaultView
     }
 }
 
 
 // MARK: - + Delegate
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return hasDataInCollection
+        return hasDataInCollection && canLoadMoreData
         ? CGSize(width: collectionView.frame.width, height: 44)
         : .zero
     }
@@ -220,7 +234,7 @@ extension CharacterCollectionHandler {
 
 
 // MARK: - + CharacterFooterDelegate
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func paginationAction() {
         isLoadingNewData = true
@@ -230,7 +244,7 @@ extension CharacterCollectionHandler {
 
 
 // MARK: - + KDSCollectionHandler
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func registerCell(at collection: KDSCollection) {
         CharacterCell.register(at: collection)
@@ -241,14 +255,14 @@ extension CharacterCollectionHandler {
 
 
 // MARK: - + KDSCollectionDelegate
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     var hasDataInCollection: Bool { data.isNotEmpty }
 }
 
 
 // MARK: - + ImagesDownloaderDelegate
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func didDownloadImageSuccessfully(image: KDSImage, _ dict: [String: Any]) {
         updateCell(image: image, with: dict)
@@ -261,7 +275,7 @@ extension CharacterCollectionHandler {
 
 
 // MARK: - + CharacterCellDelegate
-extension CharacterCollectionHandler {
+extension HomeCollectionHandler {
     
     func didChangeFavoriteStatus(_ cell: CharacterCell) {
         let data = data[cell.tag]

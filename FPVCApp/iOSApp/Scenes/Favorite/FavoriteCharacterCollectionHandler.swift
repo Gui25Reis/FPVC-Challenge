@@ -96,14 +96,9 @@ extension FavoriteCharacterCollectionHandler {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellRowCount: CGFloat = 1
-        
-        let hSpace = collection.layout.horizontalSpace + collection.padding.horizontals
-        
-        let totalSpacing: CGFloat = cellRowCount == 1 ? hSpace : (cellRowCount - 1) * hSpace
-        let width = (collectionView.bounds.width - totalSpacing) / cellRowCount
-        let height = collectionView.bounds.height * 0.15
-        return CGSize(width: width, height: height)
+        var size = collection.layout.calculateCellWidth(collection, qtdCellsInRow: 1)
+        size.height = collectionView.bounds.height * 0.15
+        return size
     }
 }
 

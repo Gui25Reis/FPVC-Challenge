@@ -35,17 +35,6 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D618AA32C81160100F8BAE5"
-               BuildableName = "KingsUITests.xctest"
-               BlueprintName = "KingsUITests"
-               ReferencedContainer = "container:FPVCApp.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "1D618AF52C8178D400F8BAE5"
                BuildableName = "KingsDSTests.xctest"
                BlueprintName = "KingsDSTests"

@@ -35,9 +35,14 @@ open class KDSCollection: UICollectionView, KDSComponent, KDSDataCollection, KDS
     public var loadingIndicator: UIActivityIndicatorView?
     
     public var canShowSpinner: Bool {
-        loadingIndicator.isNil && !bounds.isEmpty &&
-        (kdsDelegate?.hasDataInCollection).isFalse && emptyView.isHidden
+        loadingIndicator.isNil 
+        && !bounds.isEmpty
+        && (kdsDelegate?.hasDataInCollection).isFalse
+        && emptyView.isHidden
+        && isAllowedToShowSpinner
     }
+    
+    public var isAllowedToShowSpinner = true
     
     
     /* KDSEmptyViewHandler */
