@@ -10,18 +10,24 @@
 
 import KingsCryptor
 import KingsFoundation
+import KingsStorage
 
 
 class MarvelAPI {
     
     var endpointBase: String { "http://gateway.marvel.com/v1/public" }
     
+    var storage: any StorageHadler = KeychainManager()
     
-    var publicKey: String { "124db90affdebfdb6cbd55a90ffcb4fd" }
+    var publicKey: String {
+        (storage.retrieve(forKey: "marvelPublic") as? String).defaultValue
+    }
     
-    var privateKey: String { "c5708bd6e9d89b845048ebc1d0e78a9872594cd8" }
+    var privateKey: String {
+        (storage.retrieve(forKey: "marvelPriv") as? String).defaultValue
+    }
     
-    var randomKey: String { "kings" }
+    var randomKey: String { Date.now.toString(with: .asset) }
     
     
     var cryptor: KingsCryptorManager = KingsCryptor()

@@ -55,7 +55,7 @@ public enum KDSDateFormats {
         case .completeWritten:
             return "d MMMM yyyy - HH:mm"
         case .asset:
-            return "yyyyMMdd-HHmmss"
+            return "yyyyMMddHHmmss"
         }
     }
 }

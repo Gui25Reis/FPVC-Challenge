@@ -13,7 +13,7 @@ import UIKit
 
 public extension Date {
     
-    static var now: Date { Date() }
+//    static var now: Date { Date() }
     
     static var brazilTimeZone: TimeZone? {
         return TimeZone(abbreviation: "GMT-3")

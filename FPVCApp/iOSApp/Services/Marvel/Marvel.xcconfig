@@ -1,0 +1,12 @@
+//
+//  Marvel.xcconfig
+//  FPVCApp
+//
+//  Created by Gui Reis on 10/09/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+MARVEL_P = c5708bd6e9d89b845048ebc1d0e78a9872594cd8
+MARVEL_O = 124db90affdebfdb6cbd55a90ffcb4fd

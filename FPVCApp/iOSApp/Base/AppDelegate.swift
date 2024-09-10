@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import KingsStorage
 
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let utils = MarvelAPIUtils(storage: KeychainManager())
+        utils.saveAPIInfos()
+        
         return true
     }
 

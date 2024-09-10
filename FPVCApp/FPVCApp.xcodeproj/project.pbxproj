@@ -174,6 +174,11 @@
 		1DF6A3122C903C4800EAEF34 /* KFAccessRequestFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C96082C8D951F00BEEC8C /* KFAccessRequestFeature.swift */; };
 		1DF6A3132C903C4800EAEF34 /* KFAccessResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C960D2C8D957700BEEC8C /* KFAccessResponse.swift */; };
 		1DF6A3142C903C4C00EAEF34 /* KFAccessRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C96122C8D9B4F00BEEC8C /* KFAccessRequest.swift */; };
+		1DF6A3172C903FE000EAEF34 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A3162C903FE000EAEF34 /* KeychainManager.swift */; };
+		1DF6A3192C90458500EAEF34 /* KeychainParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A3182C90458500EAEF34 /* KeychainParameters.swift */; };
+		1DF6A31B2C90459900EAEF34 /* KeychainDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A31A2C90459900EAEF34 /* KeychainDict.swift */; };
+		1DF6A31D2C9049B200EAEF34 /* Marvel.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6A31C2C9049B200EAEF34 /* Marvel.xcconfig */; };
+		1DF6A3202C906F5600EAEF34 /* MarvelAPIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A31E2C906F5300EAEF34 /* MarvelAPIUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -500,6 +505,11 @@
 		1DF6A3072C902AE400EAEF34 /* SearchResultController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultController.swift; sourceTree = "<group>"; };
 		1DF6A30B2C9031C400EAEF34 /* SearchResultFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultFactory.swift; sourceTree = "<group>"; };
 		1DF6A30D2C90320D00EAEF34 /* SearchResultScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultScreen.swift; sourceTree = "<group>"; };
+		1DF6A3162C903FE000EAEF34 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		1DF6A3182C90458500EAEF34 /* KeychainParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainParameters.swift; sourceTree = "<group>"; };
+		1DF6A31A2C90459900EAEF34 /* KeychainDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainDict.swift; sourceTree = "<group>"; };
+		1DF6A31C2C9049B200EAEF34 /* Marvel.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Marvel.xcconfig; sourceTree = "<group>"; };
+		1DF6A31E2C906F5300EAEF34 /* MarvelAPIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPIUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -738,9 +748,10 @@
 		1D0D2BEF2C88FD80007DA385 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				1D0D2BF12C88FDAC007DA385 /* StorageHadler.swift */,
+				1DF6A3152C903FAE00EAEF34 /* Keychain */,
 				1D4C96372C8E104C00BEEC8C /* FileManeger */,
 				1D4C96212C8DFF3100BEEC8C /* CoreData */,
-				1D0D2BF12C88FDAC007DA385 /* StorageHadler.swift */,
 				1D0D2BF02C88FDA1007DA385 /* Cache */,
 			);
 			path = Module;
@@ -1007,6 +1018,8 @@
 			children = (
 				1D4C96292C8E02BB00BEEC8C /* Storage */,
 				1D4C96282C8E029A00BEEC8C /* Network */,
+				1DF6A31C2C9049B200EAEF34 /* Marvel.xcconfig */,
+				1DF6A31E2C906F5300EAEF34 /* MarvelAPIUtils.swift */,
 			);
 			path = Marvel;
 			sourceTree = "<group>";
@@ -1498,6 +1511,16 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
+		1DF6A3152C903FAE00EAEF34 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				1DF6A3162C903FE000EAEF34 /* KeychainManager.swift */,
+				1DF6A3182C90458500EAEF34 /* KeychainParameters.swift */,
+				1DF6A31A2C90459900EAEF34 /* KeychainDict.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1855,6 +1878,7 @@
 			files = (
 				1D618A892C81153500F8BAE5 /* Assets.xcassets in Resources */,
 				1D618A8C2C81153500F8BAE5 /* Base in Resources */,
+				1DF6A31D2C9049B200EAEF34 /* Marvel.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1924,9 +1948,12 @@
 			files = (
 				1D0D2BF22C88FDAC007DA385 /* StorageHadler.swift in Sources */,
 				1D4C96392C8E10B600BEEC8C /* FileManegerType.swift in Sources */,
+				1DF6A3172C903FE000EAEF34 /* KeychainManager.swift in Sources */,
+				1DF6A3192C90458500EAEF34 /* KeychainParameters.swift in Sources */,
 				1D4C963B2C8E16FF00BEEC8C /* ImagesStorage.swift in Sources */,
 				1D0D2BF42C88FDE9007DA385 /* NSCacheType.swift in Sources */,
 				1D4C96232C8DFF4300BEEC8C /* CoreDataManager.swift in Sources */,
+				1DF6A31B2C90459900EAEF34 /* KeychainDict.swift in Sources */,
 				1D0D2BD62C88FD77007DA385 /* KingsStorage.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1989,6 +2016,7 @@
 				1DB3573C2C8AD267003D4861 /* MarvelCharacterImage.swift in Sources */,
 				1D618ADE2C812B5500F8BAE5 /* APIHTTPMethod.swift in Sources */,
 				1D618A802C81153200F8BAE5 /* AppDelegate.swift in Sources */,
+				1DF6A3202C906F5600EAEF34 /* MarvelAPIUtils.swift in Sources */,
 				1D4C96722C8F1AE400BEEC8C /* FavoriteScreen.swift in Sources */,
 				1D4C96302C8E05BC00BEEC8C /* MarvelDBManger.swift in Sources */,
 				1D4C96842C9021C500BEEC8C /* HomeFactory.swift in Sources */,

@@ -29,9 +29,10 @@ public protocol StorageHadler {
 }
 
 
+/* Mantendo implementação opcional */
 public extension StorageHadler {
     
-    func saveChanges() {
-        /* Mantendo implementação opcional */
-    }
+    func saveChanges() { }
+    
+    func retrieveAll() -> [StorageData] { [] }
 }
