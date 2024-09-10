@@ -49,6 +49,7 @@ class FavoriteController: UIViewController, FavoritePresenter {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupNavigation()
         viewModel?.updateTableData()
     }
     
