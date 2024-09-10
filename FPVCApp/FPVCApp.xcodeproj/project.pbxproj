@@ -30,7 +30,6 @@
 		1D0D2BBA2C8843C5007DA385 /* MarvelCharacterData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BB82C8843B2007DA385 /* MarvelCharacterData.swift */; };
 		1D0D2BBE2C88ECC5007DA385 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BBD2C88ECC5007DA385 /* ImagesDownloader.swift */; };
 		1D0D2BC32C88ED1C007DA385 /* ImageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BC22C88ED1C007DA385 /* ImageAPI.swift */; };
-		1D0D2BC72C88ED5B007DA385 /* NoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BC62C88ED5B007DA385 /* NoModel.swift */; };
 		1D0D2BC92C88EDBF007DA385 /* ImagesDownloaderErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BC82C88EDBF007DA385 /* ImagesDownloaderErrors.swift */; };
 		1D0D2BCC2C88F8E7007DA385 /* KDSMainDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BCB2C88F8E7007DA385 /* KDSMainDispatcher.swift */; };
 		1D0D2BD62C88FD77007DA385 /* KingsStorage.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BD52C88FD77007DA385 /* KingsStorage.docc */; };
@@ -72,19 +71,12 @@
 		1D618A842C81153200F8BAE5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A832C81153200F8BAE5 /* HomeController.swift */; };
 		1D618A892C81153500F8BAE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D618A882C81153500F8BAE5 /* Assets.xcassets */; };
 		1D618A8C2C81153500F8BAE5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1D618A8B2C81153500F8BAE5 /* Base */; };
-		1D618AC62C811A3800F8BAE5 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AC52C811A3800F8BAE5 /* NetworkHandler.swift */; };
 		1D618ACB2C811BBC00F8BAE5 /* KingsCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ACA2C811BBC00F8BAE5 /* KingsCryptor.swift */; };
 		1D618ACE2C811DB200F8BAE5 /* KingsCryptorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ACD2C811DB200F8BAE5 /* KingsCryptorHandler.swift */; };
 		1D618AD02C811DC700F8BAE5 /* MD5Cryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ACF2C811DC700F8BAE5 /* MD5Cryptor.swift */; };
 		1D618AD22C811E0C00F8BAE5 /* KingsCryptorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AD12C811E0C00F8BAE5 /* KingsCryptorType.swift */; };
-		1D618AD42C811E9700F8BAE5 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AD32C811E9700F8BAE5 /* APIHandler.swift */; };
 		1D618AD62C811EAF00F8BAE5 /* MarvelAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AD52C811EAF00F8BAE5 /* MarvelAPI.swift */; };
 		1D618ADA2C811FE200F8BAE5 /* MarvelCharactersModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AD92C811FE200F8BAE5 /* MarvelCharactersModels.swift */; };
-		1D618ADC2C8125E500F8BAE5 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADB2C8125E500F8BAE5 /* APIErrors.swift */; };
-		1D618ADE2C812B5500F8BAE5 /* APIHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADD2C812B5500F8BAE5 /* APIHTTPMethod.swift */; };
-		1D618AE02C812EF000F8BAE5 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADF2C812EF000F8BAE5 /* APIRequest.swift */; };
-		1D618AE42C8165BB00F8BAE5 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AE32C8165BB00F8BAE5 /* NetworkError.swift */; };
-		1D618AE62C8165D700F8BAE5 /* SessionReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AE52C8165D700F8BAE5 /* SessionReturn.swift */; };
 		1D618AF12C8178D300F8BAE5 /* KingsDS.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AF02C8178D300F8BAE5 /* KingsDS.docc */; };
 		1D618AF72C8178D400F8BAE5 /* KingsDS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D618AED2C8178D300F8BAE5 /* KingsDS.framework */; };
 		1D618AFE2C8178D400F8BAE5 /* KingsDSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AFD2C8178D400F8BAE5 /* KingsDSTests.swift */; };
@@ -133,7 +125,6 @@
 		1DB357322C894565003D4861 /* KDSCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357312C894565003D4861 /* KDSCollectionDelegate.swift */; };
 		1DB357342C8949E8003D4861 /* KDSCollectionReusableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357332C8949E8003D4861 /* KDSCollectionReusableViews.swift */; };
 		1DB357372C894AC1003D4861 /* CharacterFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357362C894AC1003D4861 /* CharacterFooter.swift */; };
-		1DB3573A2C8ACE8C003D4861 /* PaginationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357392C8ACE8C003D4861 /* PaginationData.swift */; };
 		1DB3573C2C8AD267003D4861 /* MarvelCharacterImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3573B2C8AD267003D4861 /* MarvelCharacterImage.swift */; };
 		1DB357402C8ADF12003D4861 /* KDSGIfMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB3573F2C8ADF12003D4861 /* KDSGIfMaker.swift */; };
 		1DB357672C8AE0E7003D4861 /* KDSBundler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357662C8AE0E7003D4861 /* KDSBundler.swift */; };
@@ -179,6 +170,24 @@
 		1DF6A31B2C90459900EAEF34 /* KeychainDict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A31A2C90459900EAEF34 /* KeychainDict.swift */; };
 		1DF6A31D2C9049B200EAEF34 /* Marvel.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 1DF6A31C2C9049B200EAEF34 /* Marvel.xcconfig */; };
 		1DF6A3202C906F5600EAEF34 /* MarvelAPIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A31E2C906F5300EAEF34 /* MarvelAPIUtils.swift */; };
+		1DF6A32A2C90700100EAEF34 /* KingsNetwork.docc in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A3292C90700100EAEF34 /* KingsNetwork.docc */; };
+		1DF6A3302C90700200EAEF34 /* KingsNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */; };
+		1DF6A3372C90700200EAEF34 /* KingsNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A3362C90700200EAEF34 /* KingsNetworkTests.swift */; };
+		1DF6A3382C90700200EAEF34 /* KingsNetwork.h in Headers */ = {isa = PBXBuildFile; fileRef = 1DF6A3282C90700100EAEF34 /* KingsNetwork.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1DF6A33B2C90700200EAEF34 /* KingsNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */; };
+		1DF6A33C2C90700200EAEF34 /* KingsNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DF6A3442C90702100EAEF34 /* PaginationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DB357392C8ACE8C003D4861 /* PaginationData.swift */; };
+		1DF6A3452C90702700EAEF34 /* NoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D0D2BC62C88ED5B007DA385 /* NoModel.swift */; };
+		1DF6A3472C90703300EAEF34 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AE32C8165BB00F8BAE5 /* NetworkError.swift */; };
+		1DF6A3482C90703300EAEF34 /* SessionReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AE52C8165D700F8BAE5 /* SessionReturn.swift */; };
+		1DF6A3492C90703300EAEF34 /* NetworkHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AC52C811A3800F8BAE5 /* NetworkHandler.swift */; };
+		1DF6A34A2C90703C00EAEF34 /* APIHTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADD2C812B5500F8BAE5 /* APIHTTPMethod.swift */; };
+		1DF6A34B2C90703C00EAEF34 /* APIErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADB2C8125E500F8BAE5 /* APIErrors.swift */; };
+		1DF6A34C2C90703C00EAEF34 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ADF2C812EF000F8BAE5 /* APIRequest.swift */; };
+		1DF6A34D2C90703C00EAEF34 /* APIHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618AD32C811E9700F8BAE5 /* APIHandler.swift */; };
+		1DF6A34E2C90706300EAEF34 /* KingsFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D618B582C81BB0C00F8BAE5 /* KingsFoundation.framework */; };
+		1DF6A34F2C90706300EAEF34 /* KingsFoundation.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 1D618B582C81BB0C00F8BAE5 /* KingsFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1DF6A3542C9070BE00EAEF34 /* NoModelDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DF6A3532C9070BE00EAEF34 /* NoModelDefault.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -301,6 +310,34 @@
 			remoteGlobalIDString = 1D618AEC2C8178D300F8BAE5;
 			remoteInfo = KingsDS;
 		};
+		1DF6A3312C90700200EAEF34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D618A742C81153100F8BAE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DF6A3252C90700100EAEF34;
+			remoteInfo = KingsNetwork;
+		};
+		1DF6A3332C90700200EAEF34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D618A742C81153100F8BAE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D618A7B2C81153100F8BAE5;
+			remoteInfo = FPVCApp;
+		};
+		1DF6A3392C90700200EAEF34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D618A742C81153100F8BAE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1DF6A3252C90700100EAEF34;
+			remoteInfo = KingsNetwork;
+		};
+		1DF6A3502C90706300EAEF34 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1D618A742C81153100F8BAE5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1D618B572C81BB0C00F8BAE5;
+			remoteInfo = KingsFoundation;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -312,6 +349,7 @@
 			files = (
 				1D618B032C8178D400F8BAE5 /* KingsDS.framework in Embed Frameworks */,
 				1DB357852C8AE5A4003D4861 /* FPVCAssets.framework in Embed Frameworks */,
+				1DF6A33C2C90700200EAEF34 /* KingsNetwork.framework in Embed Frameworks */,
 				1D618B6E2C81BB0C00F8BAE5 /* KingsFoundation.framework in Embed Frameworks */,
 				1D618B392C81A48A00F8BAE5 /* KingsCryptor.framework in Embed Frameworks */,
 				1D0D2BE82C88FD78007DA385 /* KingsStorage.framework in Embed Frameworks */,
@@ -337,6 +375,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				1DB3579A2C8B0E5A003D4861 /* KingsDS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A3522C90706300EAEF34 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				1DF6A34F2C90706300EAEF34 /* KingsFoundation.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -510,6 +559,12 @@
 		1DF6A31A2C90459900EAEF34 /* KeychainDict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainDict.swift; sourceTree = "<group>"; };
 		1DF6A31C2C9049B200EAEF34 /* Marvel.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Marvel.xcconfig; sourceTree = "<group>"; };
 		1DF6A31E2C906F5300EAEF34 /* MarvelAPIUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelAPIUtils.swift; sourceTree = "<group>"; };
+		1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KingsNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF6A3282C90700100EAEF34 /* KingsNetwork.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KingsNetwork.h; sourceTree = "<group>"; };
+		1DF6A3292C90700100EAEF34 /* KingsNetwork.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = KingsNetwork.docc; sourceTree = "<group>"; };
+		1DF6A32F2C90700200EAEF34 /* KingsNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KingsNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF6A3362C90700200EAEF34 /* KingsNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingsNetworkTests.swift; sourceTree = "<group>"; };
+		1DF6A3532C9070BE00EAEF34 /* NoModelDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoModelDefault.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -534,6 +589,7 @@
 			files = (
 				1D618B022C8178D400F8BAE5 /* KingsDS.framework in Frameworks */,
 				1DB357842C8AE5A4003D4861 /* FPVCAssets.framework in Frameworks */,
+				1DF6A33B2C90700200EAEF34 /* KingsNetwork.framework in Frameworks */,
 				1D618B6D2C81BB0C00F8BAE5 /* KingsFoundation.framework in Frameworks */,
 				1D618B382C81A48A00F8BAE5 /* KingsCryptor.framework in Frameworks */,
 				1D0D2BE72C88FD78007DA385 /* KingsStorage.framework in Frameworks */,
@@ -599,6 +655,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DB357792C8AE5A4003D4861 /* FPVCAssets.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A3232C90700100EAEF34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF6A34E2C90706300EAEF34 /* KingsFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A32C2C90700200EAEF34 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF6A3302C90700200EAEF34 /* KingsNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,6 +784,7 @@
 			isa = PBXGroup;
 			children = (
 				1D0D2BC62C88ED5B007DA385 /* NoModel.swift */,
+				1DF6A3532C9070BE00EAEF34 /* NoModelDefault.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -908,6 +981,7 @@
 				1D618B592C81BB0C00F8BAE5 /* KingsFoundation */,
 				1D0D2BD32C88FD77007DA385 /* KingsStorage */,
 				1DB357702C8AE5A3003D4861 /* FPVCAssets */,
+				1DF6A3272C90700100EAEF34 /* KingsNetwork */,
 				1D618A7D2C81153100F8BAE5 /* Products */,
 				1D618AB92C81171300F8BAE5 /* Frameworks */,
 			);
@@ -927,6 +1001,8 @@
 				1D0D2BDB2C88FD78007DA385 /* KingsStorageTests.xctest */,
 				1DB3576F2C8AE5A3003D4861 /* FPVCAssets.framework */,
 				1DB357782C8AE5A4003D4861 /* FPVCAssetsTests.xctest */,
+				1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */,
+				1DF6A32F2C90700200EAEF34 /* KingsNetworkTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -936,7 +1012,6 @@
 			children = (
 				1D0D2BBC2C88ECAF007DA385 /* Handlers */,
 				1D618B1D2C81A46E00F8BAE5 /* Services */,
-				1D618AC42C811A2800F8BAE5 /* Network */,
 				1D618A952C8115AE00F8BAE5 /* Base */,
 				1D618A932C81159200F8BAE5 /* Scenes */,
 				1D618A8D2C81153500F8BAE5 /* Info.plist */,
@@ -1521,6 +1596,25 @@
 			path = Keychain;
 			sourceTree = "<group>";
 		};
+		1DF6A3272C90700100EAEF34 /* KingsNetwork */ = {
+			isa = PBXGroup;
+			children = (
+				1D618AC42C811A2800F8BAE5 /* Network */,
+				1DF6A3352C90700200EAEF34 /* Tests */,
+				1DF6A3282C90700100EAEF34 /* KingsNetwork.h */,
+				1DF6A3292C90700100EAEF34 /* KingsNetwork.docc */,
+			);
+			path = KingsNetwork;
+			sourceTree = "<group>";
+		};
+		1DF6A3352C90700200EAEF34 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				1DF6A3362C90700200EAEF34 /* KingsNetworkTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1561,6 +1655,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DB357812C8AE5A4003D4861 /* FPVCAssets.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A3212C90700100EAEF34 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF6A3382C90700200EAEF34 /* KingsNetwork.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,6 +1723,7 @@
 				1D618B6C2C81BB0C00F8BAE5 /* PBXTargetDependency */,
 				1D0D2BE62C88FD78007DA385 /* PBXTargetDependency */,
 				1DB357832C8AE5A4003D4861 /* PBXTargetDependency */,
+				1DF6A33A2C90700200EAEF34 /* PBXTargetDependency */,
 			);
 			name = FPVCApp;
 			productName = FPVCApp;
@@ -1779,6 +1882,45 @@
 			productReference = 1DB357782C8AE5A4003D4861 /* FPVCAssetsTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		1DF6A3252C90700100EAEF34 /* KingsNetwork */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DF6A33D2C90700200EAEF34 /* Build configuration list for PBXNativeTarget "KingsNetwork" */;
+			buildPhases = (
+				1DF6A3212C90700100EAEF34 /* Headers */,
+				1DF6A3222C90700100EAEF34 /* Sources */,
+				1DF6A3232C90700100EAEF34 /* Frameworks */,
+				1DF6A3242C90700100EAEF34 /* Resources */,
+				1DF6A3522C90706300EAEF34 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DF6A3512C90706300EAEF34 /* PBXTargetDependency */,
+			);
+			name = KingsNetwork;
+			productName = KingsNetwork;
+			productReference = 1DF6A3262C90700100EAEF34 /* KingsNetwork.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		1DF6A32E2C90700200EAEF34 /* KingsNetworkTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DF6A3402C90700200EAEF34 /* Build configuration list for PBXNativeTarget "KingsNetworkTests" */;
+			buildPhases = (
+				1DF6A32B2C90700200EAEF34 /* Sources */,
+				1DF6A32C2C90700200EAEF34 /* Frameworks */,
+				1DF6A32D2C90700200EAEF34 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1DF6A3322C90700200EAEF34 /* PBXTargetDependency */,
+				1DF6A3342C90700200EAEF34 /* PBXTargetDependency */,
+			);
+			name = KingsNetworkTests;
+			productName = KingsNetworkTests;
+			productReference = 1DF6A32F2C90700200EAEF34 /* KingsNetworkTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1827,6 +1969,13 @@
 						CreatedOnToolsVersion = 15.4;
 						TestTargetID = 1D618A7B2C81153100F8BAE5;
 					};
+					1DF6A3252C90700100EAEF34 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					1DF6A32E2C90700200EAEF34 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 1D618A7B2C81153100F8BAE5;
+					};
 				};
 			};
 			buildConfigurationList = 1D618A772C81153100F8BAE5 /* Build configuration list for PBXProject "FPVCApp" */;
@@ -1853,6 +2002,8 @@
 				1D0D2BDA2C88FD78007DA385 /* KingsStorageTests */,
 				1DB3576E2C8AE5A3003D4861 /* FPVCAssets */,
 				1DB357772C8AE5A4003D4861 /* FPVCAssetsTests */,
+				1DF6A3252C90700100EAEF34 /* KingsNetwork */,
+				1DF6A32E2C90700200EAEF34 /* KingsNetworkTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1939,6 +2090,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DF6A3242C90700100EAEF34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A32D2C90700200EAEF34 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1971,10 +2136,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D618ACE2C811DB200F8BAE5 /* KingsCryptorHandler.swift in Sources */,
-				1D0D2BC72C88ED5B007DA385 /* NoModel.swift in Sources */,
 				1D618AD22C811E0C00F8BAE5 /* KingsCryptorType.swift in Sources */,
 				1D4C961E2C8DF94200BEEC8C /* FavoriteManager.swift in Sources */,
-				1D618AE62C8165D700F8BAE5 /* SessionReturn.swift in Sources */,
 				1D0D2BA92C881D01007DA385 /* CharacterCell.swift in Sources */,
 				1D618AD02C811DC700F8BAE5 /* MD5Cryptor.swift in Sources */,
 				1DB357AF2C8B9801003D4861 /* InfosCharacterCell.swift in Sources */,
@@ -1988,33 +2151,26 @@
 				1D0D2BC92C88EDBF007DA385 /* ImagesDownloaderErrors.swift in Sources */,
 				1D618A842C81153200F8BAE5 /* HomeController.swift in Sources */,
 				1DB357A22C8B172B003D4861 /* InfosScreen.swift in Sources */,
-				1D618ADC2C8125E500F8BAE5 /* APIErrors.swift in Sources */,
 				1DB357372C894AC1003D4861 /* CharacterFooter.swift in Sources */,
 				1DF6A30E2C90320D00EAEF34 /* SearchResultScreen.swift in Sources */,
 				1D4C96602C8EE68400BEEC8C /* FavoriteCharacterCell.swift in Sources */,
 				1D618ACB2C811BBC00F8BAE5 /* KingsCryptor.swift in Sources */,
 				1DB357CA2C8D3020003D4861 /* RootFactory.swift in Sources */,
 				1D618B942C851D9600F8BAE5 /* MarvelCharactersParameters.swift in Sources */,
-				1D618AE02C812EF000F8BAE5 /* APIRequest.swift in Sources */,
 				1DB357B22C8B9960003D4861 /* InfosCharacterTableHandler.swift in Sources */,
 				1D618AD62C811EAF00F8BAE5 /* MarvelAPI.swift in Sources */,
 				1DB357C62C8D2E17003D4861 /* FavoriteController.swift in Sources */,
 				1D0D2BBE2C88ECC5007DA385 /* ImagesDownloader.swift in Sources */,
-				1D618AE42C8165BB00F8BAE5 /* NetworkError.swift in Sources */,
 				1D4C96802C9016B900BEEC8C /* HomeViewModel.swift in Sources */,
 				1D0D2BBA2C8843C5007DA385 /* MarvelCharacterData.swift in Sources */,
-				1D618AC62C811A3800F8BAE5 /* NetworkHandler.swift in Sources */,
 				1DF6A30C2C9031C400EAEF34 /* SearchResultFactory.swift in Sources */,
 				1D0D2BAE2C8823B9007DA385 /* HomeCollectionHandler.swift in Sources */,
 				1D0D2BC32C88ED1C007DA385 /* ImageAPI.swift in Sources */,
 				1D4C964E2C8EBDF800BEEC8C /* MarvelDataBase.xcdatamodeld in Sources */,
-				1D618AD42C811E9700F8BAE5 /* APIHandler.swift in Sources */,
 				1D0D2B872C85A9AC007DA385 /* HomeScreen.swift in Sources */,
 				1DB357A02C8B16E9003D4861 /* InfosController.swift in Sources */,
 				1DF6A3082C902AE400EAEF34 /* SearchResultController.swift in Sources */,
-				1DB3573A2C8ACE8C003D4861 /* PaginationData.swift in Sources */,
 				1DB3573C2C8AD267003D4861 /* MarvelCharacterImage.swift in Sources */,
-				1D618ADE2C812B5500F8BAE5 /* APIHTTPMethod.swift in Sources */,
 				1D618A802C81153200F8BAE5 /* AppDelegate.swift in Sources */,
 				1DF6A3202C906F5600EAEF34 /* MarvelAPIUtils.swift in Sources */,
 				1D4C96722C8F1AE400BEEC8C /* FavoriteScreen.swift in Sources */,
@@ -2163,6 +2319,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1DF6A3222C90700100EAEF34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF6A34A2C90703C00EAEF34 /* APIHTTPMethod.swift in Sources */,
+				1DF6A34B2C90703C00EAEF34 /* APIErrors.swift in Sources */,
+				1DF6A34C2C90703C00EAEF34 /* APIRequest.swift in Sources */,
+				1DF6A34D2C90703C00EAEF34 /* APIHandler.swift in Sources */,
+				1DF6A32A2C90700100EAEF34 /* KingsNetwork.docc in Sources */,
+				1DF6A3452C90702700EAEF34 /* NoModel.swift in Sources */,
+				1DF6A3472C90703300EAEF34 /* NetworkError.swift in Sources */,
+				1DF6A3542C9070BE00EAEF34 /* NoModelDefault.swift in Sources */,
+				1DF6A3482C90703300EAEF34 /* SessionReturn.swift in Sources */,
+				1DF6A3492C90703300EAEF34 /* NetworkHandler.swift in Sources */,
+				1DF6A3442C90702100EAEF34 /* PaginationData.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1DF6A32B2C90700200EAEF34 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1DF6A3372C90700200EAEF34 /* KingsNetworkTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2250,6 +2432,26 @@
 			isa = PBXTargetDependency;
 			target = 1D618AEC2C8178D300F8BAE5 /* KingsDS */;
 			targetProxy = 1DB3579B2C8B0E5A003D4861 /* PBXContainerItemProxy */;
+		};
+		1DF6A3322C90700200EAEF34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1DF6A3252C90700100EAEF34 /* KingsNetwork */;
+			targetProxy = 1DF6A3312C90700200EAEF34 /* PBXContainerItemProxy */;
+		};
+		1DF6A3342C90700200EAEF34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D618A7B2C81153100F8BAE5 /* FPVCApp */;
+			targetProxy = 1DF6A3332C90700200EAEF34 /* PBXContainerItemProxy */;
+		};
+		1DF6A33A2C90700200EAEF34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1DF6A3252C90700100EAEF34 /* KingsNetwork */;
+			targetProxy = 1DF6A3392C90700200EAEF34 /* PBXContainerItemProxy */;
+		};
+		1DF6A3512C90706300EAEF34 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1D618B572C81BB0C00F8BAE5 /* KingsFoundation */;
+			targetProxy = 1DF6A3502C90706300EAEF34 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3080,6 +3282,124 @@
 			};
 			name = Release;
 		};
+		1DF6A33E2C90700200EAEF34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 534V229RMK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = kings.KingsNetwork;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		1DF6A33F2C90700200EAEF34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 534V229RMK;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = kings.KingsNetwork;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		1DF6A3412C90700200EAEF34 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 534V229RMK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kings.KingsNetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPVCApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FPVCApp";
+			};
+			name = Debug;
+		};
+		1DF6A3422C90700200EAEF34 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 534V229RMK;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kings.KingsNetworkTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FPVCApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FPVCApp";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -3187,6 +3507,24 @@
 			buildConfigurations = (
 				1DB3578A2C8AE5A4003D4861 /* Debug */,
 				1DB3578B2C8AE5A4003D4861 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DF6A33D2C90700200EAEF34 /* Build configuration list for PBXNativeTarget "KingsNetwork" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DF6A33E2C90700200EAEF34 /* Debug */,
+				1DF6A33F2C90700200EAEF34 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DF6A3402C90700200EAEF34 /* Build configuration list for PBXNativeTarget "KingsNetworkTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DF6A3412C90700200EAEF34 /* Debug */,
+				1DF6A3422C90700200EAEF34 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

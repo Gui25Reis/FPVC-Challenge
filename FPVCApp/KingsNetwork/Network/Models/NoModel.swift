@@ -11,6 +11,7 @@
 import Foundation
 
 
-enum APIErrors: Error {
-    case badURL
+public protocol NoModel: Codable {
+    
+    init(data: Data)
 }

@@ -11,6 +11,7 @@
 import UIKit
 import KingsDS
 import KingsFoundation
+import KingsNetwork
 
 
 protocol HomeViewModelLogic: ViewModelType {

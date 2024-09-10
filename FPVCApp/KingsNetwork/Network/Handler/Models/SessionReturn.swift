@@ -12,11 +12,11 @@ import Foundation
 
 
 public struct SessionReturn {
-    let data: Data?
-    let respose: HTTPURLResponse?
-    let error: Error?
+    public let data: Data?
+    public let respose: HTTPURLResponse?
+    public let error: Error?
     
-    init(_ data: Data?, _ respose: URLResponse?, _ error: Error?) {
+    public init(_ data: Data?, _ respose: URLResponse?, _ error: Error?) {
         self.data = data
         self.respose = respose as? HTTPURLResponse
         self.error = error

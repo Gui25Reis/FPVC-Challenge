@@ -12,6 +12,7 @@ import UIKit
 import KingsFoundation
 import KingsStorage
 import KingsDS
+import KingsNetwork
 
 
 public protocol ImagesDownloaderDelegate: AnyObject {

@@ -12,7 +12,6 @@ import Foundation
 import KingsFoundation
 
 
-
 final public class NetworkHandler<API: APIHandler> {
     
     public typealias Response = Result<API.SuccessModel, NetworkAPIError>
@@ -22,28 +21,12 @@ final public class NetworkHandler<API: APIHandler> {
     var decoder = JSONDecoder()
     var dispatcher = KFDispatcherQueue(provider: DispatchQueue.main)
     
-    var debouncedTask: DispatchWorkItem?
-    
     let session: URLSession
     
     
     /* Construtores */
     public init(session: URLSession = URLSession.shared) {
         self.session = session
-    }
-    
-    
-    /* Encapsulamento */
-    public func makeRequestWithDebounce(for api: any APIHandler, delay: TimeInterval = 0.5, _ completion: @escaping(Response) -> Void) throws {
-        debouncedTask?.cancel()
-        
-        let task = DispatchWorkItem { [weak self] in
-            try? self?.makeRequest(for: api, completion)
-        }
-        
-        debouncedTask = task
-        
-        dispatcher.asyncAfter(delay: delay, workItem: task)
     }
     
     public func makeRequest(for api: any APIHandler, _ completion: @escaping(Response) -> Void) throws {
@@ -69,15 +52,13 @@ final public class NetworkHandler<API: APIHandler> {
             return .failure(NetworkAPIError(nil, response))
         }
         
-        showJsonDataIfPossible(with: data)
+//        showJsonDataIfPossible(with: data)
         
         do {
             let successModel = try makeSuccessModel(with: data)
-//            print("[Network] Sucesso na request")
             return .success(successModel)
         } catch {
             let failureModel = try? makeFailureModel(with: data)
-//            print("[Network] Falha na request")
             return .failure(NetworkAPIError(failureModel, response))
         }
         
@@ -96,7 +77,6 @@ final public class NetworkHandler<API: APIHandler> {
     private func createNoModelIfPossible<T: Codable>(with data: Data) -> T? {
         let noModelType = T.self as? NoModel.Type
         let model = noModelType?.init(data: data) as? T
-//        print("[Network] \(#function) | Eh um NoModel: \(noModelType.isNotNil)")
         return model
     }
     

@@ -9,6 +9,7 @@
 //
 
 import KingsFoundation
+import KingsNetwork
 
 
 final class MarvelCharacterAPI: MarvelAPI, APIHandler {

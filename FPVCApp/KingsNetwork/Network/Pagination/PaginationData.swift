@@ -11,17 +11,18 @@
 import KingsFoundation
 
 
-class PaginationData {
-    var available = 0
-    var limitePerRequest = 0
-    var requestsCount = 0 
+open class PaginationData {
     
-    var cachedLoop = [Int:[Int]]()
+    open var available = 0
+    open var limitePerRequest = 0
+    open var requestsCount = 0
     
-    var isLimitReached: Bool { requestsCount * limitePerRequest >= available }
+    open var cachedLoop = [Int:[Int]]()
+    
+    open var isLimitReached: Bool { requestsCount * limitePerRequest >= available }
     
     
-    var randomOffSet: Int {
+    open var randomOffSet: Int {
         if cachedLoop[limitePerRequest].isNotNil {
             let number = cachedLoop[limitePerRequest]?.removeRandomElement()
             return number.defaultValue
@@ -37,7 +38,14 @@ class PaginationData {
     }
     
     
-    func prepareForNewRequest() {
+    // MARK: - Construtores
+    public init() {
+        /* Permitindo instância */
+    }
+    
+    
+    // MARK: - Métodos
+    open func prepareForNewRequest() {
         available = 0
         limitePerRequest = 0
         

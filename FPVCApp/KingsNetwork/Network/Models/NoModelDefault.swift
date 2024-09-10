@@ -8,20 +8,12 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
-import UIKit
 
-
-public protocol NoModel: Codable {
+public struct NoModelDefault: NoModel {
     
-    init(data: Data)
-}
-
-
-struct NoModelDefault: NoModel {
+    public var data: Data
     
-    var data: Data
-    
-    init(data: Data) {
+    public init(data: Data) {
         self.data = data
     }
 }

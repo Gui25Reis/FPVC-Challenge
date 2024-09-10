@@ -8,6 +8,9 @@
 //  distribuído ou usado para fins comerciais sem autorização prévia do autor.
 //
 
+import KingsNetwork
+
+
 typealias ImageModel = NoModelDefault
 
 

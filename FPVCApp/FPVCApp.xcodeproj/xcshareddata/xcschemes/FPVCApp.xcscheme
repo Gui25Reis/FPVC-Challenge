@@ -85,6 +85,17 @@
                ReferencedContainer = "container:FPVCApp.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "1DF6A32E2C90700200EAEF34"
+               BuildableName = "KingsNetworkTests.xctest"
+               BlueprintName = "KingsNetworkTests"
+               ReferencedContainer = "container:FPVCApp.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
