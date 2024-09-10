@@ -16,9 +16,15 @@ final public class KeychainManager: StorageHadler {
     
     public typealias StorageData = String
     
+    var provider: KeychainProvider
 
-    public init() {
-        /* Permitindo instância da classe */
+    
+    public convenience init() {
+        self.init(provider: Keychain())
+    }
+    
+    public init(provider: KeychainProvider) {
+        self.provider = provider
     }
     
     
@@ -33,7 +39,7 @@ final public class KeychainManager: StorageHadler {
         dict.add(parameter: .value(valueData))
         
         valueData = Data()
-        _ = SecItemAdd(dict.query, nil)
+        provider.create(dict.query)
     }
     
     public func retrieve(forKey key: String) -> StorageData? {
@@ -43,9 +49,8 @@ final public class KeychainManager: StorageHadler {
         dict.add(parameter: .limitOne)
         
         var result: AnyObject?
-        let status = SecItemCopyMatching(dict.query, &result)
+        let isSuccess = provider.read(dict.query, result: &result)
         
-        let isSuccess = status == errSecSuccess
         let data = result as? Data
         
         if var data, isSuccess {
@@ -58,12 +63,11 @@ final public class KeychainManager: StorageHadler {
     public func delete(forKey key: String) {
         var dict = KeychainDict()
         dict.add(parameter: .key(key))
-        
-        _ = SecItemDelete(dict.query)
+        provider.delete(dict.query)
     }
     
     public func cleanAll() {
         let dict = KeychainDict()
-        _ = SecItemDelete(dict.query)
+        provider.delete(dict.query)
     }
 }

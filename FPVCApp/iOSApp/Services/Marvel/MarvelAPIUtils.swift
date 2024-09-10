@@ -12,21 +12,53 @@ import KingsStorage
 
 
 struct MarvelAPIUtils {
+    let keychain: KeychainManager
+    let cache: CacheManager
     
-    let storage: any StorageHadler
+    var isFirstInstallation = false
     
-    init(storage: any StorageHadler) {
-        self.storage = storage
+    
+    init(keychain: KeychainManager, cache: CacheManager) {
+        self.keychain = keychain
+        self.cache = cache
     }
     
     
-    func saveAPIInfos() {
-        let storage = KeychainManager()
-        storage.cleanAll()
-        storage.save("c5708bd6e9d89b845048ebc1d0e78a9872594cd8", forKey: "marvelPriv")
-        storage.save("124db90affdebfdb6cbd55a90ffcb4fd", forKey: "marvelPublic")
+    mutating func saveAPIInfos() {
+        cleanKeychainIfNeeded()
+        saveKeysOnKeychainIfNeeded()
+    }
+    
+    private mutating func cleanKeychainIfNeeded() {
+        let key: AppCacheKeys = .firstInstallation
+        let isFirstInstallation = cache.retrieve(forKey: key.keyName)
         
-        print(storage.retrieve(forKey: "marvelPublic") as Any)
-        print(storage.retrieve(forKey: "marvelPriv") as Any)
+        guard isFirstInstallation.isNil else { return }
+        keychain.cleanAll()
+        cache.save(true, forKey: key.keyName)
+        self.isFirstInstallation = true
+    }
+    
+    private func saveKeysOnKeychainIfNeeded() {
+        guard isFirstInstallation else { return }
+        
+        let path = Bundle.main.path(forResource: "MarvelInfos", ofType: "plist")
+        guard let path else { return }
+        
+        var dictionary = NSDictionary(contentsOfFile: path) as? [String: Any]
+        
+        saveOnKeychain(&dictionary, forKey: .marvelPriv)
+        saveOnKeychain(&dictionary, forKey: .marvelPubli)
+        
+        let installationKey: AppCacheKeys = .firstInstallation
+        cache.save(true, forKey: installationKey.keyName)
+    }
+
+    private func saveOnKeychain(_ dictionary: inout [String: Any]?, forKey key: AppCacheKeys) {
+        let data = dictionary?[key.keyName] as? String
+        guard let data else { return }
+        
+        keychain.save(data, forKey: key.keyName)
+        dictionary?[key.keyName] = "Blabla"
     }
 }

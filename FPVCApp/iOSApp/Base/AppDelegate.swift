@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let utils = MarvelAPIUtils(storage: KeychainManager())
+        var utils = MarvelAPIUtils(keychain: KeychainManager(), cache: CacheManager())
         utils.saveAPIInfos()
         
         return true
