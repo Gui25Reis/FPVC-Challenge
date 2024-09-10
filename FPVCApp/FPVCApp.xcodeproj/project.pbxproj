@@ -71,7 +71,6 @@
 		1D4C96842C9021C500BEEC8C /* HomeFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D4C96832C9021C500BEEC8C /* HomeFactory.swift */; };
 		1D618A802C81153200F8BAE5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A7F2C81153200F8BAE5 /* AppDelegate.swift */; };
 		1D618A822C81153200F8BAE5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A812C81153200F8BAE5 /* SceneDelegate.swift */; };
-		1D618A842C81153200F8BAE5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A832C81153200F8BAE5 /* HomeController.swift */; };
 		1D618A892C81153500F8BAE5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D618A882C81153500F8BAE5 /* Assets.xcassets */; };
 		1D618A8C2C81153500F8BAE5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 1D618A8B2C81153500F8BAE5 /* Base */; };
 		1D618ACB2C811BBC00F8BAE5 /* KingsCryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618ACA2C811BBC00F8BAE5 /* KingsCryptor.swift */; };
@@ -118,6 +117,7 @@
 		1D618B922C851D7C00F8BAE5 /* MarvelParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618B912C851D7C00F8BAE5 /* MarvelParameters.swift */; };
 		1D618B942C851D9600F8BAE5 /* MarvelCharactersParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618B932C851D9600F8BAE5 /* MarvelCharactersParameters.swift */; };
 		1D618B962C851E2700F8BAE5 /* MarvelCharacterAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618B952C851E2700F8BAE5 /* MarvelCharacterAPI.swift */; };
+		1D61B89E2C90B15400E23CE5 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D618A832C81153200F8BAE5 /* HomeController.swift */; };
 		1DA3BF4D2C859A31004DCFF0 /* KDSIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3BF4C2C859A31004DCFF0 /* KDSIcons.swift */; };
 		1DA3BF512C859A61004DCFF0 /* KDSFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3BF502C859A61004DCFF0 /* KDSFile.swift */; };
 		1DA3BF552C859AC1004DCFF0 /* KDSAssetsType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DA3BF542C859AC1004DCFF0 /* KDSAssetsType.swift */; };
@@ -2339,13 +2339,13 @@
 				1D4C967E2C90154700BEEC8C /* MarvelCharacterWorker.swift in Sources */,
 				1D618B922C851D7C00F8BAE5 /* MarvelParameters.swift in Sources */,
 				1D0D2BC92C88EDBF007DA385 /* ImagesDownloaderErrors.swift in Sources */,
-				1D618A842C81153200F8BAE5 /* HomeController.swift in Sources */,
 				1DB357A22C8B172B003D4861 /* InfosScreen.swift in Sources */,
 				1DB357372C894AC1003D4861 /* CharacterFooter.swift in Sources */,
 				1DF6A35C2C907D1800EAEF34 /* FavoriteViewModel.swift in Sources */,
 				1DF6A30E2C90320D00EAEF34 /* SearchResultScreen.swift in Sources */,
 				1DF6A35E2C907F8F00EAEF34 /* FavoriteFactory.swift in Sources */,
 				1D4C96602C8EE68400BEEC8C /* FavoriteCharacterCell.swift in Sources */,
+				1D61B89E2C90B15400E23CE5 /* HomeController.swift in Sources */,
 				1D618ACB2C811BBC00F8BAE5 /* KingsCryptor.swift in Sources */,
 				1DB357CA2C8D3020003D4861 /* RootFactory.swift in Sources */,
 				1D618B942C851D9600F8BAE5 /* MarvelCharactersParameters.swift in Sources */,
