@@ -22,7 +22,7 @@ protocol HomeCollectionHandlerDelegate: AnyObject {
 }
 
 
-protocol HomeCollectionHandlerLogic {
+protocol HomeCollectionHandlerLogic: AnyObject {
     
     var canLoadMoreData: Bool { get set }
     

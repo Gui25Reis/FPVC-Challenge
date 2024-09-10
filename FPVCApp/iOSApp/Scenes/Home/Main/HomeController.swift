@@ -110,7 +110,7 @@ extension HomeViewController {
 }
 
 
-// MARK: - + HomePresenter
+// MARK: - + HomeCollectionHandlerDelegate
 extension HomeViewController {
     
     func fetchMoreData() {

@@ -12,13 +12,7 @@ import Foundation
 
 
 public protocol KFDispatchQueueType: AnyObject {
-    func sync(execute: @escaping () -> Void)
     func async(group: DispatchGroup?, qos: DispatchQoS, flags: DispatchWorkItemFlags, execute work: @escaping @Sendable @convention(block) () -> Void)
-    
-    func asyncAfter(deadline: DispatchTime, execute: DispatchWorkItem)
-    func asyncAfter(wallDeadline: DispatchWallTime, execute: DispatchWorkItem)
-    func asyncAfter(deadline: DispatchTime, qos: DispatchQoS, flags: DispatchWorkItemFlags, execute work: @escaping @Sendable @convention(block) () -> Void)
-    func asyncAfter(wallDeadline: DispatchWallTime, qos: DispatchQoS, flags: DispatchWorkItemFlags, execute work: @escaping @Sendable @convention(block) () -> Void)
 }
 
 

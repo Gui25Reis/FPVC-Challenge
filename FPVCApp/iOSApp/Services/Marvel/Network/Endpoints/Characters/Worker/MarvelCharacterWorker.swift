@@ -20,7 +20,7 @@ protocol MarvelCharacterWorkerDelegate: AnyObject {
 
 
 // MARK: - MarvelCharacterWorkerLogic
-protocol MarvelCharacterWorkerLogic {
+protocol MarvelCharacterWorkerLogic: AnyObject {
     func makeRequest()
     func makePaginationRequest()
     func makeSearchRequest(with searchText: String)
